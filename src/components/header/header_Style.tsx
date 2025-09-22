@@ -45,18 +45,6 @@ export const LoginButtons = styled.div`
   gap: 10px;
   align-items: center;
 
-  & button {
-    cursor: pointer;
-    color: #f0f0f0;
-    /* font-weight: bold; */
-    font-size: 18px;
-    background-color: #3b82f6;
-    width: 120px;
-    height: 45px;
-    border-radius: 10px;
-    border: none;
-  }
-
   /* declaramos a propriedade customizada para animar o ângulo */
   @property --angle {
     syntax: "<angle>";
@@ -77,6 +65,7 @@ export const LoginButtons = styled.div`
     background: #171717; /* fundo interno */
     z-index: 0;
     overflow: hidden;
+    transition: box-shadow 0.3s ease-in-out;
   }
 
   & p::before {
@@ -97,6 +86,7 @@ export const LoginButtons = styled.div`
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     animation: spinColors 4s linear infinite;
@@ -108,4 +98,9 @@ export const LoginButtons = styled.div`
       --angle: 360deg;
     }
   }
+
+  & p:hover {
+    box-shadow: 0 0 20px 1px #3b83f686;
+  }
+
 `;

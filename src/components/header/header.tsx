@@ -1,3 +1,4 @@
+import BigButtonStyled from "../buttons/big_Button_Style";
 import { HeaderStyled, Links, LoginButtons, Logo } from "./header_Style";
 
 function Header() {
@@ -16,7 +17,7 @@ function Header() {
         </Links>
         <LoginButtons>
           <p> Log In</p>
-          <button> Sign Up</button>
+          <BigButtonStyled> Sign Up</BigButtonStyled>
         </LoginButtons>
       </HeaderStyled>
     </>
