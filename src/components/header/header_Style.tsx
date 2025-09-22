@@ -13,11 +13,10 @@ export const HeaderStyled = styled.header`
   left: 0;
   z-index: 100;
   background-color: #171717;
-  color: #F0F0F0;
+  color: #f0f0f0;
   border-bottom: 1px solid black;
   box-shadow: 0 0 10px #000000;
 `;
-
 
 export const Logo = styled.div`
   display: flex;
@@ -30,7 +29,7 @@ export const Logo = styled.div`
     height: 80px;
     background: transparent;
   }
-`
+`;
 
 export const Links = styled.div`
   display: flex;
@@ -39,7 +38,7 @@ export const Links = styled.div`
   & p {
     cursor: pointer;
   }
-`
+`;
 
 export const LoginButtons = styled.div`
   display: flex;
@@ -48,7 +47,7 @@ export const LoginButtons = styled.div`
 
   & button {
     cursor: pointer;
-    color: #F0F0F0;
+    color: #f0f0f0;
     /* font-weight: bold; */
     font-size: 18px;
     background-color: #3b82f6;
@@ -58,7 +57,14 @@ export const LoginButtons = styled.div`
     border: none;
   }
 
- & p {
+  /* declaramos a propriedade customizada para animar o ângulo */
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  & p {
     position: relative;
     cursor: pointer;
     font-size: 18px;
@@ -79,28 +85,27 @@ export const LoginButtons = styled.div`
     inset: 0;
     border-radius: 10px;
     padding: 2px; /* espessura da borda */
-    background: linear-gradient(
-      90deg,
-      #3B82F6,
-      #6530FC,
-      #303EFC,
-      #30BFFC,
-      #A730FC,
-      #848CFC
+    background: conic-gradient(
+      from var(--angle),
+      #3b82f6,
+      #6530fc,
+      #303efc,
+      #30bffc,
+      #a730fc,
+      #848cfc,
+      #3b82f6
     );
-    background-size: 300% 300%;
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    animation: gradientMove 4s linear infinite;
+    animation: spinColors 4s linear infinite;
     z-index: -1;
   }
 
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes spinColors {
+    to {
+      --angle: 360deg;
+    }
   }
-`
+`;
