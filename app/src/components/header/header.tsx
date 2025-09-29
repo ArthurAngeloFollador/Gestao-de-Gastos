@@ -1,45 +1,41 @@
 import { useNavigate } from "react-router";
 import { HeaderStyled, Links, Logo, HeaderButtons } from "./header_Style";
 import Buttons from "../buttons/ButtonStyles";
+import { useAuth } from "../../hooks/useAuth";
 
 function Header() {
   const navigate = useNavigate();
-
-  function onHomeClick() {
-    console.log("maconha 2");
-
-    navigate(`/teste`);
-  }
+  const { user, logout } = useAuth(); // pegando user e logout do hook
 
   return (
-    <>
-      <HeaderStyled>
-        <Logo>
-          <img src="./src/assets/imgs/logo_no_bg.png" alt="logo" />
-          <h1>MoneyControl</h1>
-        </Logo>
+    <HeaderStyled>
+      <Logo>
+        <img src="./src/assets/imgs/logo_no_bg.png" alt="logo" />
+        <h1>MoneyControl</h1>
+      </Logo>
 
-        <Links>
-          <p>Home</p>
-          <p
-            onClick={() => {
-              console.log("maconha ");
+      <Links>
+        <p onClick={() => navigate("/dashboard")}>Dashboard</p>
+        <p onClick={() => navigate("/about")}>About</p>
+        <p onClick={() => navigate("/prices")}>Prices</p>
+        <p onClick={() => navigate("/contact")}>Contact</p>
+      </Links>
 
-              onHomeClick();
-            }}
-          >
-            About
-          </p>
-          <p>Prices</p>
-          <p>Contact</p>
-        </Links>
-
-        <HeaderButtons>
-          <Buttons.SmallBlinking>Log In</Buttons.SmallBlinking>
-          <Buttons.Small>Sign Up</Buttons.Small>
-        </HeaderButtons>
-      </HeaderStyled>
-    </>
+      <HeaderButtons>
+        {user ? (
+          <>
+            {console.log("batata")}
+            
+            <Buttons.Small onClick={logout}>Sair</Buttons.Small>
+          </>
+        ) : (
+          <>
+            <Buttons.SmallBlinking onClick={() => navigate("/login")}>Log In</Buttons.SmallBlinking>
+            <Buttons.Small onClick={() => navigate("/signup")}>Sign Up</Buttons.Small>
+          </>
+        )}
+      </HeaderButtons>
+    </HeaderStyled>
   );
 }
 

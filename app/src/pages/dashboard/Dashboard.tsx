@@ -1,6 +1,6 @@
 
 
-function Home() {
+function Dashboard() {
   return (
       <div>
         <h1>Hello World!</h1>
@@ -8,4 +8,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Dashboard;

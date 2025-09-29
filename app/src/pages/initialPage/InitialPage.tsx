@@ -17,9 +17,9 @@ import {
 import Footer from "../../components/footer/Footer.tsx";
 // import BigButtonStyled from "../../components/buttons/big_Button_Style";
 import Buttons from "../../components/buttons/ButtonStyles.tsx";
-import Graph from "../../assets/graphIcon.svg";
-import Bell from "../../assets/bell.svg";
-import Dollar from "../../assets/dollar.svg";
+import Graph from "../../assets/svgs/graphIcon.svg";
+import Bell from "../../assets/svgs/bell.svg";
+import Dollar from "../../assets/svgs/dollar.svg";
 
 function InitialPage() {
   return (

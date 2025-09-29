@@ -8,7 +8,7 @@ const BaseButton = styled.button`
   background-color: #3b82f6;
   border-radius: 10px;
   border: none;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: box-shadow 0.5s ease-in-out;
 
   &:hover {
     box-shadow: 0 0 20px 1px #3b82f6;
@@ -36,7 +36,7 @@ const LargeNoBgButton = styled(BaseButton)`
 
 const SmallButton = styled(BaseButton)`
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 18px;
   width: 120px;
   height: 45px;
 `;
@@ -94,6 +94,14 @@ const SmallBlinkingButton = styled(BaseButton)`
   }
 `;
 
+const SubmitLargeButton = styled(BaseButton)`
+  padding: 6px 12px;
+  font-size: 18px;
+  width: 450px;
+  height: 50px;
+  font-weight: bold;
+`;
+
 interface ButtonProps {
   children: ReactNode;
 }
@@ -107,6 +115,7 @@ interface ButtonComponent extends React.FC<ButtonProps> {
   Small: React.FC<SubButtonProps>;
   SmallBlinking: React.FC<SubButtonProps>;
   LargeNoBg: React.FC<SubButtonProps>;
+  SubmitLarge: React.FC<SubButtonProps>;
 }
 
 const Buttons: ButtonComponent = ({ children }) => {
@@ -127,6 +136,10 @@ Buttons.SmallBlinking = ({ children, ...rest }) => (
 
 Buttons.LargeNoBg = ({ children, ...rest }) => (
   <LargeNoBgButton {...rest}>{children}</LargeNoBgButton>
+);
+
+Buttons.SubmitLarge = ({ children, ...rest }) => (
+  <SubmitLargeButton {...rest}>{children}</SubmitLargeButton>
 );
 export default Buttons;
 
