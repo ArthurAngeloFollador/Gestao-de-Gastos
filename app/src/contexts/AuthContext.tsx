@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { typeUserEnum } from "../constants/enums/typeUserEnum"; // Import the enum
+import { typeUserEnum } from "../constants/enums/typeUserEnum";
 
 export interface User {
   role: keyof typeof typeUserEnum; // Updated type for `role`
@@ -19,7 +19,20 @@ interface LoginError {
   status: number;
 }
 
+interface SignUpSuccess {
+  ok: true;
+  status: number;
+}
+
+interface SignUpError {
+  ok: false;
+  error: string;
+  code: string;
+  status: number;
+}
+
 export type LoginResponse = LoginSuccess | LoginError;
+export type SignUpResponse = SignUpSuccess | SignUpError;
 
 export interface AuthContextType {
   user: User | undefined;
@@ -28,6 +41,7 @@ export interface AuthContextType {
   onLoadUser: () => void;
   adminLogin: (email: string, password: string) => Promise<LoginResponse>;
   userLogin: (email: string, password: string) => Promise<LoginResponse>;
+  signupUser: (name: string, email: string, password: string) => Promise<SignUpResponse>;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(

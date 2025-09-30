@@ -142,17 +142,3 @@ Buttons.SubmitLarge = ({ children, ...rest }) => (
   <SubmitLargeButton {...rest}>{children}</SubmitLargeButton>
 );
 export default Buttons;
-
-// function Buttons({ children }: ButtonProps): JSX.Element {
-//   return <>{children}</>;
-// }
-
-// Buttons.Large = ({ children }: { children: ReactNode }) => (
-//   <LargeButton>{children}</LargeButton>
-// );
-
-// Buttons.Small = ({ children }: { children: ReactNode }) => (
-//   <SmallButton>{children}</SmallButton>
-// );
-
-// export default Buttons;

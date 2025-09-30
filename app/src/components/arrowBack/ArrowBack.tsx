@@ -9,6 +9,8 @@ function ArrowBack() {
     <ArrowBackStyle>
       <img src={ArrowLeft} onClick={() => navigate("/")} />
     </ArrowBackStyle>
+
+    
   );
 }
 

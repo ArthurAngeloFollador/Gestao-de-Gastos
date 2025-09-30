@@ -2,7 +2,7 @@ import {
   InputContainer,
   LoginSubText,
   LoginText,
-  TextContainer
+  TextContainer,
 } from "./loginStyle";
 import Inputs from "../../components/inputs/InputStyles";
 import LogoNoBg from "../../assets/imgs/logo_no_bg.png";
@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <>
-    <ArrowBack />
+      <ArrowBack />
       <TextContainer>
         <img src={LogoNoBg} />
         <LoginText>Welcome back to MoneyControl</LoginText>
@@ -89,7 +89,7 @@ function Login() {
             navigate("/signup");
           }}
         >
-          Already have an account? Sign Up
+          Don't have an account? Sign Up
         </a>
       </InputContainer>
     </>

@@ -1,8 +1,9 @@
+import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { useState, type ReactNode } from "react";
 import { AuthContext, type User, type LoginResponse } from "./AuthContext";
 import { AxiosError } from "axios";
-import { loginAdmin, loginUser } from "../services/authService";
+import { loginAdmin, loginUser, signupUser } from "../services/authService";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | undefined>(undefined);
@@ -12,8 +13,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const login = (userData: User) => setUser(userData);
+
+  // localStorage
+
+  // const onLoadUser = () => {
+  //   const token = localStorage.getItem("token");
+
+  //   if (token) {
+  //     const decoded = jwtDecode<DecodedToken>(token);
+
+  //     if (!isTokenValid(decoded)) {
+  //       logout();
+  //     } else {
+  //       setUser(decoded as User); // type assertion
+  //     }
+  //   }
+  // };
+
+  // cookies
   const onLoadUser = () => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
 
     if (token) {
       const decoded = jwtDecode<DecodedToken>(token);
@@ -21,10 +40,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!isTokenValid(decoded)) {
         logout();
       } else {
-        setUser(decoded as User); // type assertion
+        setUser(decoded as User);
       }
     }
   };
+
+  // cookies how to use
+
+  // // Set a cookie
+  // Cookies.set('username', 'JohnDoe', { expires: 7 }); // expires in 7 days
+
+  // // Get a cookie
+  // const username = Cookies.get('username');
+
+  // // Remove a cookie
+  // Cookies.remove('username');
 
   function isTokenValid(decoded: DecodedToken) {
     return decoded.exp * 1000 > new Date().getTime();
@@ -114,6 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         login,
         logout,
         onLoadUser,
+        signupUser,
       }}
     >
       {children}

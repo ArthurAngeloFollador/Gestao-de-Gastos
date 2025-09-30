@@ -2,7 +2,6 @@ import { type InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
 const BaseInput = styled.input`
-  cursor: pointer;
   color: #f0f0f0;
   font-size: 18px;
   background-color: #171717;
