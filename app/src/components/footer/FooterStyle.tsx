@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import devices from "../../styles/breakpoints";
 
 export const FooterStyled = styled.footer`
   display: flex;
@@ -9,6 +10,10 @@ export const FooterStyled = styled.footer`
   padding: 40px 60px;
   border-top: 1px solid #2a2a2a;
   padding-top: 20px;
+
+  @media ${devices.laptop} {
+    width: 1000px;
+  }
 `;
 
 export const LogoAndName = styled.div`

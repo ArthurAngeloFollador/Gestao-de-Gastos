@@ -83,10 +83,16 @@ function SignUp() {
           value={password}
         />
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-        <Buttons.SubmitLarge>Sign Up</Buttons.SubmitLarge>
-        <a
+        <Buttons.SubmitLarge
           onClick={() => {
             onSignUpClick();
+          }}
+        >
+          Sign Up
+        </Buttons.SubmitLarge>
+        <a
+          onClick={() => {
+            navigate("/login");
           }}
           className="passwordOrAccount"
         >

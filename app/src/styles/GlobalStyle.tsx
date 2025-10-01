@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
 
     :root{
         background-color: #171717;
+        /* background-color: #101922; */
     }
 `;
 

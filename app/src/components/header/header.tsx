@@ -14,12 +14,12 @@ function Header() {
         <h1>MoneyControl</h1>
       </Logo>
 
-      <Links>
+      {/* <Links>
         <p onClick={() => navigate("/dashboard")}>Dashboard</p>
         <p onClick={() => navigate("/about")}>About</p>
         <p onClick={() => navigate("/prices")}>Prices</p>
         <p onClick={() => navigate("/contact")}>Contact</p>
-      </Links>
+      </Links> */}
 
       <HeaderButtons>
         {user ? (

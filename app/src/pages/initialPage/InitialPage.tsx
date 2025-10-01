@@ -17,11 +17,14 @@ import {
 import Footer from "../../components/footer/Footer.tsx";
 // import BigButtonStyled from "../../components/buttons/big_Button_Style";
 import Buttons from "../../components/buttons/ButtonStyles.tsx";
-import Graph from "../../assets/svgs/graphIcon.svg";
+import Graph from "../../assets/svgs/graph.svg";
 import Bell from "../../assets/svgs/bell.svg";
 import Dollar from "../../assets/svgs/dollar.svg";
+import { useNavigate } from "react-router";
 
 function InitialPage() {
+  const navigate = useNavigate()
+
   return (
     <>
       <Header />
@@ -33,7 +36,7 @@ function InitialPage() {
           <p>save money and achieve your financial goals.</p>
         </InitialPageTextHero>
         <HeroButtons>
-          <Buttons.Large>Create Free Account</Buttons.Large>
+          <Buttons.Large onClick={() => navigate("/signup")} >Create Free Account</Buttons.Large>
           <Buttons.LargeNoBg>View Demo</Buttons.LargeNoBg>
         </HeroButtons>
       </InitialPageStyled>

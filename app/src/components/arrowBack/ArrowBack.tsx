@@ -7,7 +7,7 @@ function ArrowBack() {
 
   return (
     <ArrowBackStyle>
-      <img src={ArrowLeft} onClick={() => navigate("/")} />
+      <img src={ArrowLeft} onClick={() => navigate(-1)} />
     </ArrowBackStyle>
 
     

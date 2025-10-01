@@ -1,10 +1,18 @@
-
+import Header from "../../components/header/header";
+import Sidebar from "../../components/sidebar/Sidebar.tsx";
+import * as S from "./dashboardStyle.tsx";
 
 function Dashboard() {
   return (
-      <div>
-        <h1>Hello World!</h1>
-      </div>
+    <>
+      <Header />
+      <S.DashboardContainer>
+          <Sidebar />
+        <S.DashboardContent>
+          <S.DashboardTitle>Dashboard</S.DashboardTitle>
+        </S.DashboardContent>
+      </S.DashboardContainer>
+    </>
   );
 }
 
