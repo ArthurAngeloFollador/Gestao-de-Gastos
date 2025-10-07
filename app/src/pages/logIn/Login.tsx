@@ -36,6 +36,13 @@ function Login() {
     if ("error" in response) {
       setErrorMessage(response.error);
     } else {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          name: userLogin.name,
+          type: "USER",
+        })
+      );
       navigate("/dashboard");
     }
   }

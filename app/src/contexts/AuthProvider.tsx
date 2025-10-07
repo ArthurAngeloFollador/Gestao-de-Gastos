@@ -134,6 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("token");
     setUser(undefined);
   }
+  
 
   return (
     <AuthContext.Provider

@@ -15,14 +15,14 @@ function PrivateRoute({ children, accesControl }: Props) {
   useEffect(() => {
     onLoadUser();
     setReady(true);
-  }, []);
+  }, [onLoadUser]);
 
   if (!ready) {
     return <div>Loading...</div>;
   }
 
   if (!user) {
-    if (accesControl && !accesControl.includes(typeUserEnum.ADMIN)) {
+    if (accesControl && !accesControl.includes(typeUserEnum.USER)) {
       return <Navigate to="/login/admin" />;
     }
     return <Navigate to="/login" />;

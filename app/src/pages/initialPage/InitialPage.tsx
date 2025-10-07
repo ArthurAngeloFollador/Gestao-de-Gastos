@@ -23,7 +23,7 @@ import Dollar from "../../assets/svgs/dollar.svg";
 import { useNavigate } from "react-router";
 
 function InitialPage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
@@ -36,7 +36,9 @@ function InitialPage() {
           <p>save money and achieve your financial goals.</p>
         </InitialPageTextHero>
         <HeroButtons>
-          <Buttons.Large onClick={() => navigate("/signup")} >Create Free Account</Buttons.Large>
+          <Buttons.Large onClick={() => navigate("/signup")}>
+            Create Free Account
+          </Buttons.Large>
           <Buttons.LargeNoBg>View Demo</Buttons.LargeNoBg>
         </HeroButtons>
       </InitialPageStyled>
@@ -60,11 +62,7 @@ function InitialPage() {
 
           <Card>
             <ImageDiv>
-              <img
-                src={Graph}
-                alt="graph"
-                style={{ transform: "rotate(270deg)" }}
-              />
+              <img src={Graph} alt="graph" />
             </ImageDiv>
             <AllCardText>
               <CardTittle>Detailed Reports</CardTittle>

@@ -39,8 +39,8 @@ export interface AuthContextType {
   login: (user: User) => void;
   logout: () => void;
   onLoadUser: () => void;
-  adminLogin: (email: string, password: string) => Promise<LoginResponse>;
-  userLogin: (email: string, password: string) => Promise<LoginResponse>;
+  adminLogin: (email: string, password: string, name?: string) => Promise<LoginResponse>;
+  userLogin: (email: string, password: string, name?: string) => Promise<LoginResponse>;
   signupUser: (name: string, email: string, password: string) => Promise<SignUpResponse>;
 }
 

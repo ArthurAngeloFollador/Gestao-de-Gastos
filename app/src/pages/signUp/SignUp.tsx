@@ -23,6 +23,10 @@ function SignUp() {
   const [email, setEmail]: [string, (email: string) => void] = useState("");
   const [password, setPassword]: [string, (password: string) => void] =
     useState("");
+  const [confirmPassword, setConfirmPassword]: [
+    string,
+    (confirmPassword: string) => void
+  ] = useState("");
 
   const [errorMessage, setErrorMessage]: [
     string,
@@ -30,8 +34,13 @@ function SignUp() {
   ] = useState("");
 
   const onSignUpClick = async () => {
-    if (!username || !email || !password || !password) {
+    if (!username || !email || !password || !password || !confirmPassword) {
       setErrorMessage("Please fill in all fields");
+      return;
+    }
+
+    if(confirmPassword !== password) {
+      setErrorMessage("Passwords do not match");
       return;
     }
 
@@ -80,7 +89,10 @@ function SignUp() {
         <Inputs.Large
           type="password"
           placeholder="Confirm Password"
-          value={password}
+          value={confirmPassword}
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+          }}
         />
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Buttons.SubmitLarge
