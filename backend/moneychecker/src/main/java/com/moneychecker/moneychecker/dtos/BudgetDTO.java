@@ -1,4 +1,4 @@
-package com.moneychecker.moneychecker.dtos.create;
+package com.moneychecker.moneychecker.dtos;
 
 import java.math.BigDecimal;
 import java.util.Date;

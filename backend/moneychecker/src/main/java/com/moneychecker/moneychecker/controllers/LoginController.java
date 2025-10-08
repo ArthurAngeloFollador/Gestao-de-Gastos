@@ -22,41 +22,15 @@ import com.moneychecker.moneychecker.services.SystemUserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/signup")
-public class UserController {
+@RequestMapping("/login")
+public class LoginController {
 
     @Autowired
     SystemUserService systemUserService;
 
     @GetMapping
-    public Page<SystemUserDTO> findAll(@PageableDefault(size = 10, page = 0) Pageable pageable) {
-        return systemUserService.findAll(pageable);
-    }
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<SystemUserDTO> findById(@PathVariable Integer id) {
-        return systemUserService.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    @Transactional
-    public SystemUser create(@RequestBody @Valid SystemUserDTO createDTO) {
-        return systemUserService.create(createDTO);
-    }
-
-    @PutMapping
-    @Transactional
-    public void update(@RequestBody @Valid SystemUserDTO updateDTO) {
-        systemUserService.update(updateDTO);
-    }
-
-    @DeleteMapping
-    @Transactional
-    public void delete(@PathVariable Integer id) {
-        try {
-            systemUserService.delete(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ResponseEntity<SystemUserDTO> getUser(@RequestBody @Valid SystemUserDTO userDTO) {
+        return systemUserService.getUserDTOByEmail(userDTO.email()).map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

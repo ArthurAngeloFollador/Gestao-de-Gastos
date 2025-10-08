@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.validation.constraints.NotNull;
 
 @Validated
@@ -18,6 +20,8 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
 
     protected final JpaRepository<T, ID> repository;
     protected final GenericMapper<T, DTO> mapper;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     public GenericServiceImpl(JpaRepository<T, ID> repository, GenericMapper<T, DTO> mapper) {
         this.repository = repository;
@@ -42,7 +46,7 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                 if (excludeFields != null && excludeFields.contains(fieldName)) {
                     continue;
                 }
-
+ 
                 sourceField.setAccessible(true);
                 Object value = sourceField.get(source);
 
