@@ -13,7 +13,7 @@ export const DashboardContent = styled.div`
   height: 100%;
   padding-top: 80px;
   padding-bottom: 80px;
-  padding-left: 20%;
+  padding-left: 260px;
 `;
 
 export const DashboardTitle = styled.h1`

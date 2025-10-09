@@ -8,10 +8,16 @@ const BaseButton = styled.button`
   background-color: #3b82f6;
   border-radius: 10px;
   border: none;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  
+  -webkit-user-drag: none;
+  user-select: none;
   transition: box-shadow 0.5s ease-in-out;
-
+  
   &:hover {
-    box-shadow: 0 0 20px 1px #3b82f6;
+    box-shadow: 0 0 5px 1px #3b82f6;
   }
 `;
 

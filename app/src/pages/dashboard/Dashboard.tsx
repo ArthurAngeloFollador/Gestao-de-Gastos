@@ -2,10 +2,10 @@ import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar.tsx";
 import Card from "../../components/cards/Cards.tsx";
 import * as S from "./dashboardStyle.tsx";
-import ArrowUp from "../../assets/svgs/largeArrowUp.svg";
 import LineGraph from "../../components/graphs/lineGraph/LineGraps.tsx";
 import BarGraph from "../../components/graphs/barGraph/BarGraph.tsx";
 import Footer from "../../components/footer/Footer.tsx";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
 interface DashboardCardData {
   id: string;
@@ -100,7 +100,7 @@ function Dashboard() {
     const formatted = Math.abs(amount).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 2,
     });
     return type === "income" ? `+${formatted}` : `-${formatted}`;
   };
@@ -110,7 +110,7 @@ function Dashboard() {
     const formatted = Math.abs(balance).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 2,
     });
     return balance < 0 ? `-${formatted}` : formatted;
   };
@@ -118,8 +118,8 @@ function Dashboard() {
   return (
     <>
       <Header />
+      <Sidebar />
       <S.DashboardContainer>
-        <Sidebar />
         <S.DashboardContent>
           <S.DashboardInfo>
             <S.DashboardWrapper>
@@ -134,9 +134,16 @@ function Dashboard() {
                           <Card.LowCardTittle>{card.title}</Card.LowCardTittle>
                           <Card.CardMoney>{card.amount}</Card.CardMoney>
                         </div>
+                        {/* If percentual is negative show arrow down */}
                         {card.showArrow && card.percentage && (
-                          <Card.UpOrDownExpense>
-                            <img src={ArrowUp} alt="arrow up" />
+                          ((card.percentage).includes("+")) ? 
+                            <Card.UpOrDownExpense className="income">
+                            <BsArrowUp className="income" fontSize="30px" />
+                            {card.percentage}
+                          </Card.UpOrDownExpense>
+                          :
+                          <Card.UpOrDownExpense className="expense">
+                            <BsArrowDown className="expense" fontSize="30px" />
                             {card.percentage}
                           </Card.UpOrDownExpense>
                         )}

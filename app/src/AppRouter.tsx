@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { typeUserEnum } from "./constants/enums/typeUserEnum.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import InitialPage from "./pages/initialPage/InitialPage.tsx";
 import PrivateRoute from "./components/PrivateRoute.tsx";
-import { typeUserEnum } from "./constants/enums/typeUserEnum.tsx";
 import About from "./pages/about/About.tsx";
 import Accounts from "./pages/accounts/Accounts.tsx";
 import Prices from "./pages/prices/Prices.tsx";
@@ -13,6 +13,7 @@ import NotFound from "./pages/notFound/NotFound";
 import Unauthorized from "./pages/unauthorized/Unauthorized";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import LoadingPage from "./pages/loadingPage/LoadingPage.tsx";
+import Transactions from "./pages/transactions/Transactions.tsx";
 
 function AppRouter() {
   return (
@@ -47,11 +48,19 @@ function AppRouter() {
             }
           />
           <Route
+            path="/transactions"
+            element={
+              // <PrivateRoute accesControl={[typeUserEnum.ADMIN, typeUserEnum.USER]}>
+                <Transactions />
+              // </PrivateRoute>
+            }
+          />
+          <Route
             path="/accounts"
             element={
-              <PrivateRoute accesControl={[typeUserEnum.USER]}>
+              // <PrivateRoute accesControl={[typeUserEnum.USER]}>
                 <Accounts />
-              </PrivateRoute>
+              // </PrivateRoute>
             }
           />
 

@@ -27,6 +27,14 @@ const BaseCard = styled.div`
 const DashboardSmallCard = styled(BaseCard)`
   width: 500px;
   height: 275px;
+
+    & .income {
+    color: #00bb00;
+  }
+
+  & .expense {
+    color: #ff4444;
+  }
 `;
 
 // Recent Transactions Card
@@ -81,10 +89,17 @@ const AccountItem = styled.div`
 const UpOrDownExpense = styled.p`
   display: flex;
   align-items: center;
-  color: #00bb00;
   font-size: 25px;
   font-weight: normal;
   height: 40px;
+
+  & .income {
+    color: #00bb00;
+  }
+
+  & .expense {
+    color: #ff4444;
+  }
 
   & img {
     width: 30px;
@@ -92,10 +107,6 @@ const UpOrDownExpense = styled.p`
     background: transparent;
     z-index: 100;
     -webkit-user-drag: none;
-  }
-
-  &.negative {
-    color: #ff4444;
   }
 `;
 
@@ -237,9 +248,10 @@ const TableBody = styled.tbody`
 `;
 
 const Td = styled.td`
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.4rem;
   white-space: nowrap;
   font-size: 0.875rem;
+  overflow-x: hidden;
 
   &:last-child {
     text-align: right;

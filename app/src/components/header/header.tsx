@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { HeaderStyled, Links, Logo, HeaderButtons } from "./header_Style";
+import { HeaderStyled, Logo, HeaderButtons } from "./header_Style";
 import Buttons from "../buttons/ButtonStyles";
 import { useAuth } from "../../hooks/useAuth";
 
