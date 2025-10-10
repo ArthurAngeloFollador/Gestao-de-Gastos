@@ -15,15 +15,19 @@ public record SystemUserDTO(
         @NotNull(groups = ValidationGroups.Update.class)
         @Null(groups = ValidationGroups.Find.class)
         Integer userId,
+        
         @NotBlank(groups = ValidationGroups.Create.class) 
         String passwordHash, 
+        
         @NotBlank(groups = ValidationGroups.Create.class)
         @Null(groups = ValidationGroups.Find.class)
         @Size(min = 3, max = 100)
         String name, 
+        
         @NotBlank(groups = ValidationGroups.Create.class)
         @Email
         String email, 
+
         boolean active) implements ContractDTO {
 
     @Override

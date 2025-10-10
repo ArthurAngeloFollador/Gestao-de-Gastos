@@ -46,11 +46,10 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                 if (excludeFields != null && excludeFields.contains(fieldName)) {
                     continue;
                 }
- 
+
                 sourceField.setAccessible(true);
                 Object value = sourceField.get(source);
 
-                // Só atualiza campos não nulos (exceto Boolean que pode ser false)
                 if (value != null) {
                     try {
                         Field targetField = targetClass.getDeclaredField(fieldName);
@@ -59,7 +58,6 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                             targetField.set(target, value);
                         }
                     } catch (NoSuchFieldException e) {
-                        // Campo não existe no target, ignora
                     }
                 }
             }
