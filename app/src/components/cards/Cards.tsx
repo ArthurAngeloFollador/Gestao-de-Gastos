@@ -14,7 +14,7 @@ const BaseCard = styled.div`
   background-color: #3636368d;
   user-select: none;
   transition: transform 0.2s ease-in;
-  overflow-y: hide;
+  overflow-y: hidden;
   overflow-x: hidden;
 
   &:hover {
@@ -28,7 +28,7 @@ const DashboardSmallCard = styled(BaseCard)`
   width: 500px;
   height: 275px;
 
-    & .income {
+  & .income {
     color: #00bb00;
   }
 
@@ -117,13 +117,12 @@ const Balance = styled.div`
   min-width: 100px; /* garante espaço para alinhar, evita wrap */
 `;
 
-
 // Main title for big Cards
 const BigTitleCard = styled.p`
   color: #f0f0f0;
   font-size: 22px;
   font-weight: bold;
-  z-index: 100;
+  /* z-index: 100; */
 `;
 
 // // Up or Down Arrow & percentage text
@@ -155,7 +154,7 @@ const UpTextContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  z-index: 8;
+  /* z-index: 8; */
 `;
 
 // Title for small Cards
@@ -163,7 +162,7 @@ const LowCardTittle = styled.p`
   color: #a1a1a1;
   font-size: 15px;
   font-weight: bold;
-  z-index: 100;
+  /* z-index: 100; */
 `;
 
 // Money for small Cards
@@ -171,7 +170,7 @@ const CardMoney = styled.p`
   color: #f0f0f0;
   font-size: 25px;
   font-weight: bold;
-  z-index: 100;
+  /* z-index: 100; */
 `;
 
 // Container for everything but the title
@@ -298,6 +297,45 @@ const DateCell = styled(Td)`
   color: #9ca3af;
 `;
 
+const ReportOptionsCard = styled(BaseCard)`
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  width: 380px;
+  height: 420px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+`;
+
+const InputOptions = styled.select`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #f0f0f0;
+  background-color: transparent;
+  outline: none;
+
+  option {
+    background-color: #363636;
+    color: #f0f0f0;
+  }
+
+  :focus {
+    outline: none;
+    border-color: #0080ff;
+  }
+`;
+
 // Graph for small Cards
 const CardGraph = styled.div`
   overflow: hidden;
@@ -341,6 +379,9 @@ interface CardComponent extends React.FC<CardProps> {
   AccountNumber: React.FC<SubCardProps>;
   Balance: React.FC<SubCardProps>;
   DivBalances: React.FC<SubCardProps>;
+  ReportOptionsCard: React.FC<SubCardProps>;
+  InputContainer: React.FC<SubCardProps>;
+  InputOptions: React.FC<SubCardProps>;
 }
 
 const Card: CardComponent = ({ children }) => {
@@ -435,6 +476,18 @@ Card.Balance = ({ children, ...rest }) => (
 
 Card.DivBalances = ({ children, ...rest }) => (
   <DivBalances {...rest}>{children}</DivBalances>
+);
+
+Card.ReportOptionsCard = ({ children, ...rest }) => (
+  <ReportOptionsCard {...rest}>{children}</ReportOptionsCard>
+);
+
+Card.InputContainer = ({ children, ...rest }) => (
+  <InputContainer {...rest}>{children}</InputContainer>
+);
+
+Card.InputOptions = ({ children, ...rest }) => (
+  <InputOptions {...rest}>{children}</InputOptions>
 );
 
 export default Card;

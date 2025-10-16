@@ -11,11 +11,11 @@ const BaseButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  
+
   -webkit-user-drag: none;
   user-select: none;
   transition: box-shadow 0.5s ease-in-out;
-  
+
   &:hover {
     box-shadow: 0 0 5px 1px #3b82f6;
   }
@@ -108,6 +108,23 @@ const SubmitLargeButton = styled(BaseButton)`
   font-weight: bold;
 `;
 
+const SubmitSmallButton = styled(BaseButton)`
+  padding: 6px 12px;
+  font-size: 18px;
+  width: 340px;
+  height: 40px;
+  font-weight: bold;
+`;
+
+const SubmitSmallButtonLite = styled(SubmitSmallButton)`
+  background-color: #4747478d;
+  color: #b1b1b18d;
+
+  &:hover{
+    box-shadow: 0 0 5px 1px #cccccc8d;
+  }
+`;
+
 interface ButtonProps {
   children: ReactNode;
 }
@@ -122,6 +139,8 @@ interface ButtonComponent extends React.FC<ButtonProps> {
   SmallBlinking: React.FC<SubButtonProps>;
   LargeNoBg: React.FC<SubButtonProps>;
   SubmitLarge: React.FC<SubButtonProps>;
+  SubmitSmall: React.FC<SubButtonProps>;
+  SubmitSmallLite: React.FC<SubButtonProps>;
 }
 
 const Buttons: ButtonComponent = ({ children }) => {
@@ -146,5 +165,13 @@ Buttons.LargeNoBg = ({ children, ...rest }) => (
 
 Buttons.SubmitLarge = ({ children, ...rest }) => (
   <SubmitLargeButton {...rest}>{children}</SubmitLargeButton>
+);
+
+Buttons.SubmitSmall = ({ children, ...rest }) => (
+  <SubmitSmallButton {...rest}>{children}</SubmitSmallButton>
+);
+
+Buttons.SubmitSmallLite = ({ children, ...rest }) => (
+  <SubmitSmallButtonLite {...rest}>{children}</SubmitSmallButtonLite>
 );
 export default Buttons;

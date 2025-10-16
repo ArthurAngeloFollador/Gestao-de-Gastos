@@ -15,6 +15,7 @@ import ResetPassword from "./pages/resetPassword/ResetPassword";
 import LoadingPage from "./pages/loadingPage/LoadingPage.tsx";
 import Transactions from "./pages/transactions/Transactions.tsx";
 import Budgets from "./pages/budgets/budgets.tsx";
+import Reports from "./pages/reports/Reports.tsx";
 
 function AppRouter() {
   return (
@@ -69,6 +70,14 @@ function AppRouter() {
             element={
               // <PrivateRoute accesControl={[typeUserEnum.USER]}>
                 <Budgets />
+              // </PrivateRoute>
+            }
+          />
+          <Route
+            path="/reports"
+            element={
+              // <PrivateRoute accesControl={[typeUserEnum.USER]}>
+                <Reports />
               // </PrivateRoute>
             }
           />
