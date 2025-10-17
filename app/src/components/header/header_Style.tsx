@@ -19,26 +19,28 @@ export const HeaderStyled = styled.header`
 `;
 
 export const Logo = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
-  cursor: pointer;
+  user-select: none;
 
   & img {
+    -webkit-user-drag: none;
     width: 80px;
     height: 80px;
     background: transparent;
   }
 `;
 
-export const Links = styled.div`
-  display: flex;
-  gap: 50px;
+// export const Links = styled.div`
+//   display: flex;
+//   gap: 50px;
 
-  & p {
-    cursor: pointer;
-  }
-`;
+//   & p {
+//     cursor: pointer;
+//   }
+// `;
 
 export const HeaderButtons = styled.div`
   display: flex;

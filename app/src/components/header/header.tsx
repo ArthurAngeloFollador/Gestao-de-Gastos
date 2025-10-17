@@ -7,11 +7,13 @@ function Header() {
   const navigate = useNavigate();
   const { user, logout } = useAuth(); // pegando user e logout do hook
 
+  const onLogoClick = () => navigate("/");
+
   return (
     <HeaderStyled>
       <Logo>
         <img src="./src/assets/imgs/logo_no_bg.png" alt="logo" />
-        <h1>MoneyControl</h1>
+        <h1 onClick={() => onLogoClick()}>MoneyControl</h1>
       </Logo>
 
       {/* <Links>
@@ -25,13 +27,17 @@ function Header() {
         {user ? (
           <>
             {console.log("batata")}
-            
+
             <Buttons.Small onClick={logout}>Sair</Buttons.Small>
           </>
         ) : (
           <>
-            <Buttons.SmallBlinking onClick={() => navigate("/login")}>Log In</Buttons.SmallBlinking>
-            <Buttons.Small onClick={() => navigate("/signup")}>Sign Up</Buttons.Small>
+            <Buttons.SmallBlinking onClick={() => navigate("/login")}>
+              Log In
+            </Buttons.SmallBlinking>
+            <Buttons.Small onClick={() => navigate("/signup")}>
+              Sign Up
+            </Buttons.Small>
           </>
         )}
       </HeaderButtons>

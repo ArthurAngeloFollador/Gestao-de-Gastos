@@ -29,6 +29,7 @@ const LargeButton = styled(BaseButton)`
 `;
 
 const LargeNoBgButton = styled(BaseButton)`
+  cursor: pointer;
   text-align: center;
   align-content: center;
   width: 250px;
@@ -36,7 +37,6 @@ const LargeNoBgButton = styled(BaseButton)`
   background-color: #171717;
   color: #f0f0f0;
   border-radius: 10px;
-  cursor: pointer;
   border: #3f4041 solid 1px;
 `;
 
@@ -77,10 +77,8 @@ const SmallBlinkingButton = styled(BaseButton)`
     background: conic-gradient(
       from var(--angle),
       #3b82f6,
-      #6530fc,
       #303efc,
       #30bffc,
-      #a730fc,
       #848cfc,
       #3b82f6
     );

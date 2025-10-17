@@ -21,7 +21,6 @@ export const ReportTypes = styled.div`
   align-items: center;
   justify-content: start;
   border-bottom: 1px solid #696969;
-  /* padding: 1.5rem 0; */
 `;
 
 export const ReportType = styled.p`
@@ -38,7 +37,6 @@ export const ReportType = styled.p`
 
   &.active {
     color: aqua;
-    /* font-weight: bold; */
     border-bottom: 2px solid aqua;
   }
 `;
@@ -60,14 +58,14 @@ export const InformationCardsCpntainer = styled.div`
 export const CheckboxContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: .5rem;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
   font-weight: light;
-  font-size: .9rem;
+  font-size: 0.9rem;
   width: 100%;
   height: 1.25rem;
-  padding: 0 .313rem;
+  padding: 0 0.313rem;
   align-items: center;
   justify-content: start;
 `;
@@ -75,7 +73,7 @@ export const CheckboxContainer = styled.div`
 export const SubmitButtons = styled.div`
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   width: 100%;
   height: 100%;
   align-items: center;

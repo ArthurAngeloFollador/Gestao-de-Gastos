@@ -23,8 +23,10 @@ export const LogoAndName = styled.div`
   padding-right: 30px;
   color: #f0f0f0;
   font-size: 20px;
+  user-select: none;
 
   & img {
+    -webkit-user-drag: none;
     width: 150px;
     height: 150px;
     background: transparent;
@@ -33,6 +35,7 @@ export const LogoAndName = styled.div`
 `;
 
 export const Rights = styled.div`
+  user-select: none;
   width: 100%;
   text-align: center;
   font-size: 14px;

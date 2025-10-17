@@ -117,8 +117,8 @@ function Transactions() {
             </S.TableBody>
           </S.Table>
         </S.TableContainer>
+        <Footer />
       </Container>
-      <Footer />
     </>
   );
 }

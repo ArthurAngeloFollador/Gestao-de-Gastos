@@ -6,6 +6,7 @@ import LineGraph from "../../components/graphs/lineGraph/LineGraps.tsx";
 import BarGraph from "../../components/graphs/barGraph/BarGraph.tsx";
 import Footer from "../../components/footer/Footer.tsx";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+import Container from "../../components/conteiners/Container.tsx";
 
 interface DashboardCardData {
   id: string;
@@ -119,114 +120,105 @@ function Dashboard() {
     <>
       <Header />
       <Sidebar />
-      <S.DashboardContainer>
-        <S.DashboardContent>
-          <S.DashboardInfo>
-            <S.DashboardWrapper>
-              <S.DashboardTitle>Dashboard</S.DashboardTitle>
-              <S.Cards>
-                {/* First & Second Card */}
-                {cardData.map((card) => (
-                  <div key={card.id} className={card.id}>
-                    <Card.DashboardSmallCard>
-                      <Card.UpTextContainer>
-                        <div>
-                          <Card.LowCardTittle>{card.title}</Card.LowCardTittle>
-                          <Card.CardMoney>{card.amount}</Card.CardMoney>
-                        </div>
-                        {/* If percentual is negative show arrow down */}
-                        {card.showArrow && card.percentage && (
-                          ((card.percentage).includes("+")) ? 
-                            <Card.UpOrDownExpense className="income">
-                            <BsArrowUp className="income" fontSize="30px" />
-                            {card.percentage}
-                          </Card.UpOrDownExpense>
-                          :
-                          <Card.UpOrDownExpense className="expense">
-                            <BsArrowDown className="expense" fontSize="30px" />
-                            {card.percentage}
-                          </Card.UpOrDownExpense>
-                        )}
-                      </Card.UpTextContainer>
-                      {card.graphComponent && (
-                        <Card.CardGraph>{card.graphComponent}</Card.CardGraph>
-                      )}
-                    </Card.DashboardSmallCard>
-                  </div>
+      <Container title="Dashboard" hasButton={false}>
+        <S.DashboardWrapper>
+          <S.Cards>
+            {/* First & Second Card */}
+            {cardData.map((card) => (
+              <div key={card.id} className={card.id}>
+                <Card.DashboardSmallCard>
+                  <Card.UpTextContainer>
+                    <div>
+                      <Card.LowCardTittle>{card.title}</Card.LowCardTittle>
+                      <Card.CardMoney>{card.amount}</Card.CardMoney>
+                    </div>
+                    {/* If percentual is negative show arrow down */}
+                    {card.showArrow &&
+                      card.percentage &&
+                      (card.percentage.includes("+") ? (
+                        <Card.UpOrDownExpense className="income">
+                          <BsArrowUp className="income" fontSize="30px" />
+                          {card.percentage}
+                        </Card.UpOrDownExpense>
+                      ) : (
+                        <Card.UpOrDownExpense className="expense">
+                          <BsArrowDown className="expense" fontSize="30px" />
+                          {card.percentage}
+                        </Card.UpOrDownExpense>
+                      ))}
+                  </Card.UpTextContainer>
+                  {card.graphComponent && (
+                    <Card.CardGraph>{card.graphComponent}</Card.CardGraph>
+                  )}
+                </Card.DashboardSmallCard>
+              </div>
+            ))}
+
+            {/* Recent Transactions Card */}
+            <Card.DashboardBigCard>
+              <Card.UpTextContainer>
+                <Card.BigTitleCard>Recent Transactions</Card.BigTitleCard>
+              </Card.UpTextContainer>
+              <Card.CardContent>
+                <Card.TableContainer>
+                  <Card.Table>
+                    <Card.TableHead>
+                      <tr>
+                        <Card.Th>Description</Card.Th>
+                        <Card.Th>Date</Card.Th>
+                        <Card.Th>Category</Card.Th>
+                        <Card.Th>Amount</Card.Th>
+                      </tr>
+                    </Card.TableHead>
+                    <Card.TableBody>
+                      {transactions.map((transaction, index) => (
+                        <tr key={index}>
+                          <Card.Description>
+                            {transaction.description}
+                          </Card.Description>
+                          <Card.DateCell>{transaction.date}</Card.DateCell>
+                          <Card.Td>{transaction.category}</Card.Td>
+                          <Card.Td className={transaction.type}>
+                            {formatAmount(transaction.amount, transaction.type)}
+                          </Card.Td>
+                        </tr>
+                      ))}
+                    </Card.TableBody>
+                  </Card.Table>
+                </Card.TableContainer>
+              </Card.CardContent>
+            </Card.DashboardBigCard>
+
+            {/* Account Balances Card */}
+            <Card.DashboardAcountBalancesCard>
+              <Card.UpTextContainer>
+                <Card.BigTitleCard>Account Balances</Card.BigTitleCard>
+              </Card.UpTextContainer>
+              <Card.CardContent>
+                {accounts.map((account) => (
+                  <Card.DivBalances key={account.accountNumber}>
+                    <Card.AccountItem>
+                      <div>
+                        <Card.AccountName>{account.name}</Card.AccountName>
+                        <Card.AccountNumber>
+                          {account.accountNumber}
+                        </Card.AccountNumber>
+                      </div>
+
+                      <Card.Balance
+                        className={account.balance < 0 ? "expense" : "income"}
+                      >
+                        {formatBalance(account.balance)}
+                      </Card.Balance>
+                    </Card.AccountItem>
+                  </Card.DivBalances>
                 ))}
-
-                {/* Recent Transactions Card */}
-                <Card.DashboardBigCard>
-                  <Card.UpTextContainer>
-                    <Card.BigTitleCard>Recent Transactions</Card.BigTitleCard>
-                  </Card.UpTextContainer>
-                  <Card.CardContent>
-                    <Card.TableContainer>
-                      <Card.Table>
-                        <Card.TableHead>
-                          <tr>
-                            <Card.Th>Description</Card.Th>
-                            <Card.Th>Date</Card.Th>
-                            <Card.Th>Category</Card.Th>
-                            <Card.Th>Amount</Card.Th>
-                          </tr>
-                        </Card.TableHead>
-                        <Card.TableBody>
-                          {transactions.map((transaction, index) => (
-                            <tr key={index}>
-                              <Card.Description>
-                                {transaction.description}
-                              </Card.Description>
-                              <Card.DateCell>{transaction.date}</Card.DateCell>
-                              <Card.Td>{transaction.category}</Card.Td>
-                              <Card.Td className={transaction.type}>
-                                {formatAmount(
-                                  transaction.amount,
-                                  transaction.type
-                                )}
-                              </Card.Td>
-                            </tr>
-                          ))}
-                        </Card.TableBody>
-                      </Card.Table>
-                    </Card.TableContainer>
-                  </Card.CardContent>
-                </Card.DashboardBigCard>
-
-                {/* Account Balances Card */}
-                <Card.DashboardAcountBalancesCard>
-                  <Card.UpTextContainer>
-                    <Card.BigTitleCard>Account Balances</Card.BigTitleCard>
-                  </Card.UpTextContainer>
-                  <Card.CardContent>
-                    {accounts.map((account) => (
-                      <Card.DivBalances key={account.accountNumber}>
-                        <Card.AccountItem>
-                          <div>
-                            <Card.AccountName>{account.name}</Card.AccountName>
-                            <Card.AccountNumber>
-                              {account.accountNumber}
-                            </Card.AccountNumber>
-                          </div>
-
-                          <Card.Balance
-                            className={
-                              account.balance < 0 ? "expense" : "income"
-                            }
-                          >
-                            {formatBalance(account.balance)}
-                          </Card.Balance>
-                        </Card.AccountItem>
-                      </Card.DivBalances>
-                    ))}
-                  </Card.CardContent>
-                </Card.DashboardAcountBalancesCard>
-              </S.Cards>
-            </S.DashboardWrapper>
-          </S.DashboardInfo>
-        </S.DashboardContent>
-      </S.DashboardContainer>
-      <Footer />
+              </Card.CardContent>
+            </Card.DashboardAcountBalancesCard>
+          </S.Cards>
+        </S.DashboardWrapper>
+        <Footer />
+      </Container>
     </>
   );
 }

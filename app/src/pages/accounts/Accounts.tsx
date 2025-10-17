@@ -1,10 +1,9 @@
-import Buttons from "../../components/buttons/ButtonStyles";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import * as S from "./accountsStyle";
 import Bank from "../../assets/svgs/icons/bankIcon.svg";
-import { AiOutlinePlus } from "react-icons/ai";
+import Container from "../../components/conteiners/Container";
 
 interface accountsInterface {
   id: number;
@@ -39,24 +38,20 @@ function Accounts() {
   const FormatedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  })
+  });
   return (
     <>
       <Header />
       <Sidebar />
-      <S.AccountsConteiner>
-        <S.AccountsContent>
-          <S.PageHeader>
-            <S.AccountsTitle>Accounts</S.AccountsTitle>
-            <Buttons.Large>
-              <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: "10px"}}>
-              <AiOutlinePlus style={{color: "#f0f0f0", fontSize: "30px"}} />
-               Add Account
-              </div>
-               </Buttons.Large>
-          </S.PageHeader>
-          <S.Accountsdiv>
-            {accounts.map((account) => {return (
+      <Container
+        title="Accounts"
+        hasButton={true}
+        buttonText="Add Account"
+        hasPlusIcon={true}
+      >
+        <S.Accountsdiv>
+          {accounts.map((account) => {
+            return (
               <div key={account.id} className={account.id.toString()}>
                 <S.IndividualAccount>
                   <S.ImgAndTextAccount>
@@ -66,14 +61,16 @@ function Accounts() {
                       <S.LittleText>{account.name}</S.LittleText>
                     </S.Text>
                   </S.ImgAndTextAccount>
-                  <S.AmountInAccount>{FormatedAmount.format(account.amount)}</S.AmountInAccount>
+                  <S.AmountInAccount>
+                    {FormatedAmount.format(account.amount)}
+                  </S.AmountInAccount>
                 </S.IndividualAccount>
               </div>
-            )})}
-          </S.Accountsdiv>
-        </S.AccountsContent>
-      </S.AccountsConteiner>
-      <Footer />
+            );
+          })}
+        </S.Accountsdiv>
+        <Footer />
+      </Container>
     </>
   );
 }

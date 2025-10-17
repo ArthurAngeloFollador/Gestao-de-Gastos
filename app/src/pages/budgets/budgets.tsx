@@ -61,25 +61,30 @@ function Budgets() {
         <S.PageSubtitle>Categories</S.PageSubtitle>
         <S.Categories>
           {budgets.map((budget) => {
-return (
-            <S.Category>
-              <S.TitleAndIcon>
-                <S.CategoryIcon>
-                  <IoFastFoodOutline size={38} />
-                </S.CategoryIcon>
+            return (
+              <S.Category>
+                <S.TitleAndIcon>
+                  <S.CategoryIcon>
+                    <IoFastFoodOutline size={38} />
+                  </S.CategoryIcon>
 
-                <S.CategoryText>
-                  <S.CategoryTitle>{budget.category}</S.CategoryTitle>
-                  <S.CategoryAmount>{budget.current}/{budget.target}</S.CategoryAmount>
-                </S.CategoryText>
-              </S.TitleAndIcon>
+                  <S.CategoryText>
+                    <S.CategoryTitle>{budget.category}</S.CategoryTitle>
+                    <S.CategoryAmount>
+                      {budget.current}/{budget.target}
+                    </S.CategoryAmount>
+                  </S.CategoryText>
+                </S.TitleAndIcon>
 
-              <S.CategoryProgressBarConteiner>
-                <ProgressBar percentage={(budget.current / budget.target) * 100} showPercentage={true} />
-              </S.CategoryProgressBarConteiner>
-            </S.Category>)
+                <S.CategoryProgressBarConteiner>
+                  <ProgressBar
+                    percentage={(budget.current / budget.target) * 100}
+                    showPercentage={true}
+                  />
+                </S.CategoryProgressBarConteiner>
+              </S.Category>
+            );
           })}
-
         </S.Categories>
       </Container>
     </>
