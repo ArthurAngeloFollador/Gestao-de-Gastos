@@ -16,16 +16,22 @@ public record BudgetDTO (
         @NotNull(groups = ValidationGroups.Update.class)
         @NotNull(groups = ValidationGroups.Delete.class)
         Integer budgetId,
+        
         @NotBlank(groups = ValidationGroups.Create.class)
         String budgetName, 
+        
         @NotBlank(groups = ValidationGroups.Create.class)
         PeriodTypeEnum periodType, 
+        
         @NotNull(groups = ValidationGroups.Create.class)
         Date startDate, 
+        
         @NotNull(groups = ValidationGroups.Create.class)
         Date endDate,
+        
         @NotNull(groups = ValidationGroups.Create.class)
         BigDecimal totalBudget,
+        
         BudgetStatusEnum active) implements ContractDTO {
 
     @Override

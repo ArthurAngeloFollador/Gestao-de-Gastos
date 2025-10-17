@@ -42,7 +42,7 @@ public class UserController {
         systemUserService.update(updateDTO);
     }
 
-    @DeleteMapping
+    @DeleteMapping(path = "/{id}")
     @Transactional
     public void delete(@PathVariable Integer id) {
         try {
