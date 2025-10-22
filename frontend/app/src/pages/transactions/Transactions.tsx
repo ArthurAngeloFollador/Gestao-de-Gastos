@@ -1,10 +1,14 @@
-import { AiOutlineDown } from "react-icons/ai";
 import Container from "../../components/conteiners/Container";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import * as S from "./transactionsStyle";
-import { MdOutlineEdit } from "react-icons/md";
 import Footer from "../../components/footer/Footer";
+
+import * as S from "./transactionsStyle";
+
+import { formatCurrency } from "../../utils/formatters";
+
+import { AiOutlineDown } from "react-icons/ai";
+import { MdOutlineEdit } from "react-icons/md";
 
 function Transactions() {
   // interface for debug before database
@@ -105,7 +109,7 @@ function Transactions() {
                     <Date>{transaction.date}</Date>
                   </S.TableCell>
                   <S.TableCell>
-                    <S.Amount>${transaction.amount.toFixed(2)}</S.Amount>
+                    <S.Amount>{formatCurrency(transaction.amount, {showPlusForPositive: false})}</S.Amount>
                   </S.TableCell>
                   <S.TableCell>
                     <S.EditButton onClick={() => handleEdit(transaction.id)}>

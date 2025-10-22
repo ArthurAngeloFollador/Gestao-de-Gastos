@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { typeUserEnum } from "./constants/enums/typeUserEnum.tsx";
+// import { typeUserEnum } from "./constants/enums/typeUserEnum.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import InitialPage from "./pages/initialPage/InitialPage.tsx";
-import PrivateRoute from "./components/PrivateRoute.tsx";
+// import PrivateRoute from "./components/PrivateRoute.tsx";
 import About from "./pages/about/About.tsx";
 import Accounts from "./pages/accounts/Accounts.tsx";
 import Prices from "./pages/prices/Prices.tsx";
@@ -33,14 +33,14 @@ function AppRouter() {
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Private routes */}
-          <Route
+          {/* <Route
             path="/login/admin"
             element={
               <PrivateRoute accesControl={[typeUserEnum.ADMIN]}>
                 <Login />
               </PrivateRoute>
             }
-          />
+          /> */}
           <Route
             path="/dashboard"
             element={

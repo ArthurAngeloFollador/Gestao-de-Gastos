@@ -1,17 +1,21 @@
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar.tsx";
 import Card from "../../components/cards/Cards.tsx";
-import * as S from "./dashboardStyle.tsx";
 import LineGraph from "../../components/graphs/lineGraph/LineGraps.tsx";
 import BarGraph from "../../components/graphs/barGraph/BarGraph.tsx";
 import Footer from "../../components/footer/Footer.tsx";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import Container from "../../components/conteiners/Container.tsx";
+
+import * as S from "./dashboardStyle.tsx";
+
+import { formatCurrency } from "../../utils/formatters";
+
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
 interface DashboardCardData {
   id: string;
   title: string;
-  amount?: string;
+  amount?: number;
   percentage?: string;
   showArrow?: boolean;
   graphComponent?: React.ReactNode;
@@ -23,7 +27,7 @@ function Dashboard() {
     {
       id: "div1",
       title: "Income VS. Expenses",
-      amount: "$12,500",
+      amount: 125000,
       percentage: "+15%",
       showArrow: true,
       graphComponent: <LineGraph />,
@@ -97,25 +101,6 @@ function Dashboard() {
     },
   ];
 
-  const formatAmount = (amount: number, type: "income" | "expense") => {
-    const formatted = Math.abs(amount).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    });
-    return type === "income" ? `+${formatted}` : `-${formatted}`;
-  };
-
-  // Format balance as currency with proper sign
-  const formatBalance = (balance: number): string => {
-    const formatted = Math.abs(balance).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    });
-    return balance < 0 ? `-${formatted}` : formatted;
-  };
-
   return (
     <>
       <Header />
@@ -129,8 +114,15 @@ function Dashboard() {
                 <Card.DashboardSmallCard>
                   <Card.UpTextContainer>
                     <div>
+                      {/* If amount is not null show amount */}
                       <Card.LowCardTittle>{card.title}</Card.LowCardTittle>
-                      <Card.CardMoney>{card.amount}</Card.CardMoney>
+                      {card.amount ? (
+                        <Card.CardMoney>
+                          {formatCurrency(card.amount, {
+                            showPlusForPositive: true,
+                          })}
+                        </Card.CardMoney>
+                      ) : null}
                     </div>
                     {/* If percentual is negative show arrow down */}
                     {card.showArrow &&
@@ -159,6 +151,7 @@ function Dashboard() {
               <Card.UpTextContainer>
                 <Card.BigTitleCard>Recent Transactions</Card.BigTitleCard>
               </Card.UpTextContainer>
+
               <Card.CardContent>
                 <Card.TableContainer>
                   <Card.Table>
@@ -170,6 +163,7 @@ function Dashboard() {
                         <Card.Th>Amount</Card.Th>
                       </tr>
                     </Card.TableHead>
+
                     <Card.TableBody>
                       {transactions.map((transaction, index) => (
                         <tr key={index}>
@@ -179,7 +173,7 @@ function Dashboard() {
                           <Card.DateCell>{transaction.date}</Card.DateCell>
                           <Card.Td>{transaction.category}</Card.Td>
                           <Card.Td className={transaction.type}>
-                            {formatAmount(transaction.amount, transaction.type)}
+                            {formatCurrency(transaction.amount)}
                           </Card.Td>
                         </tr>
                       ))}
@@ -208,7 +202,9 @@ function Dashboard() {
                       <Card.Balance
                         className={account.balance < 0 ? "expense" : "income"}
                       >
-                        {formatBalance(account.balance)}
+                        {formatCurrency(account.balance, {
+                          showPlusForPositive: false,
+                        })}
                       </Card.Balance>
                     </Card.AccountItem>
                   </Card.DivBalances>
