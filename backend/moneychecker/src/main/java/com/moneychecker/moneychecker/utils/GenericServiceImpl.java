@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.validation.constraints.NotNull;
 
 @Validated
@@ -18,6 +20,8 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
 
     protected final JpaRepository<T, ID> repository;
     protected final GenericMapper<T, DTO> mapper;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     public GenericServiceImpl(JpaRepository<T, ID> repository, GenericMapper<T, DTO> mapper) {
         this.repository = repository;
@@ -46,7 +50,6 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                 sourceField.setAccessible(true);
                 Object value = sourceField.get(source);
 
-                // Só atualiza campos não nulos (exceto Boolean que pode ser false)
                 if (value != null) {
                     try {
                         Field targetField = targetClass.getDeclaredField(fieldName);
@@ -55,7 +58,6 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                             targetField.set(target, value);
                         }
                     } catch (NoSuchFieldException e) {
-                        // Campo não existe no target, ignora
                     }
                 }
             }

@@ -12,4 +12,7 @@ public class ValidationGroups {
 
     public interface Delete {
     }
+
+    public interface Find {
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.moneychecker.moneychecker.dtos.create.BudgetDTO;
+import com.moneychecker.moneychecker.dtos.BudgetDTO;
 import com.moneychecker.moneychecker.services.BudgetService;
 
 import jakarta.validation.Valid;
