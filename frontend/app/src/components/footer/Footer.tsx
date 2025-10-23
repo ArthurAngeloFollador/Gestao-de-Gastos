@@ -24,27 +24,27 @@ function Footer() {
           </LogoContainer>
           <Sections>
             <Section>
-              <p>SOLUÇÕES</p>
+              <p>SOLUTIONS</p>
               <p className="tags">Marketing</p>
-              <p className="tags">Análise</p>
-              <p className="tags">Comércio</p>
+              <p className="tags">Analysis</p>
+              <p className="tags">Commerce</p>
             </Section>
             <Section>
-              <p>SUPORTE</p>
-              <p className="tags">Preços</p>
-              <p className="tags">Documentação</p>
-              <p className="tags">Guias</p>
+              <p>SUPPORT</p>
+              <p className="tags">Prices</p>
+              <p className="tags">Documentation</p>
+              <p className="tags">Guides</p>
             </Section>
             <Section>
-              <p>EMPRESA</p>
-              <p className="tags">Sobre</p>
+              <p>COMPANY</p>
+              <p className="tags">About</p>
               <p className="tags">Blog</p>
-              <p className="tags">Carreiras</p>
+              <p className="tags">Carrers</p>
             </Section>
             <Section>
               <p>LEGAL</p>
-              <p className="tags">Privacidade</p>
-              <p className="tags">Termos</p>
+              <p className="tags">Privacy</p>
+              <p className="tags">Terms</p>
             </Section>
           </Sections>
         </SuperiorLine>

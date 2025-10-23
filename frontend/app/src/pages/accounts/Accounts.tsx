@@ -1,9 +1,13 @@
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar";
-import * as S from "./accountsStyle";
-import Bank from "../../assets/svgs/icons/bankIcon.svg";
 import Container from "../../components/conteiners/Container";
+
+import * as S from "./accountsStyle";
+
+import { formatCurrency } from "../../utils/formatters";
+
+import Bank from "../../assets/svgs/icons/bankIcon.svg";
 
 interface accountsInterface {
   id: number;
@@ -35,10 +39,6 @@ function Accounts() {
     },
   ];
 
-  const FormatedAmount = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
   return (
     <>
       <Header />
@@ -62,7 +62,7 @@ function Accounts() {
                     </S.Text>
                   </S.ImgAndTextAccount>
                   <S.AmountInAccount>
-                    {FormatedAmount.format(account.amount)}
+                    {formatCurrency(account.amount, {showPlusForPositive: false})}
                   </S.AmountInAccount>
                 </S.IndividualAccount>
               </div>

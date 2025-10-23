@@ -1,4 +1,8 @@
 import { IoFastFoodOutline } from "react-icons/io5";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import React, { useState } from "react";
+
+import { formatCurrency } from "../../utils/formatters";
 
 import * as S from "./budgetsStyle";
 
@@ -6,8 +10,10 @@ import Container from "../../components/conteiners/Container";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProgressBar from "../../components/progressBar/ProgressBar";
+import Footer from "../../components/footer/Footer";
 
 function Budgets() {
+  // Just for testing
   const budgets = [
     {
       category: "Housing",
@@ -31,6 +37,41 @@ function Budgets() {
     },
   ];
 
+  // just for testing
+  // const amounts = [
+  //   {
+  //     name: "Total Budget",
+  //     amount: "$2,000.00",
+  //   },
+  //   {
+  //     name: "Total Spent",
+  //     amount: "$1,500.00",
+  //   },
+  // ]
+
+  // Amount visibility
+  const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+  const mode = isPasswordVisible ? "signed" : "masked";
+
+  // Function to toggle visibility
+  function toggleEyeIcon() {
+    setIsPasswordVisible((prev) => !prev); // toggle the state using the previous value
+  }
+
+  // Funtion to show eye icon
+  type ShowEyeIconProps = {
+    isVisible: boolean;
+    onClick: () => void;
+  };
+
+  function ShowEyeIcon({
+    isVisible,
+    onClick,
+  }: ShowEyeIconProps): React.ReactElement {
+    const Icon = isVisible ? BsEye : BsEyeSlash; // Switch between eye and eye-slash icons
+    return <Icon size={36} color="#f0f0f0" onClick={onClick} />; // Render the icon using the constant
+  }
+
   return (
     <>
       <Header />
@@ -45,15 +86,32 @@ function Budgets() {
         <S.PageSubtitle>Overview</S.PageSubtitle>
         <S.OverviewContainer>
           <S.Overviews>
-            <S.OverviewTitle>Total Budget</S.OverviewTitle>
+            {/* first Card */}
+            <S.TitleAndAmount>
+              <S.OverviewTitle>Total Budget</S.OverviewTitle>
 
-            <S.OverviewAmount>$2,000.00</S.OverviewAmount>
+              <S.OverviewAmount>
+                { formatCurrency(2000, { mode, currency: "USD", showPlusForPositive: false }) }
+              </S.OverviewAmount>
+            </S.TitleAndAmount>
+
+            <S.OverviewIcon>
+              <ShowEyeIcon
+                isVisible={isPasswordVisible}
+                onClick={toggleEyeIcon}
+              />
+            </S.OverviewIcon>
           </S.Overviews>
 
           <S.Overviews>
-            <S.OverviewTitle>Total Spent</S.OverviewTitle>
+            {/* second Card */}
+            <S.TitleAndAmount>
+              <S.OverviewTitle>Total Spent</S.OverviewTitle>
 
-            <S.OverviewAmount>$1,000.00</S.OverviewAmount>
+             <S.OverviewAmount>
+                { formatCurrency(1500, { currency: "USD", showPlusForPositive: false }) }
+              </S.OverviewAmount>
+            </S.TitleAndAmount>
           </S.Overviews>
         </S.OverviewContainer>
 
@@ -86,6 +144,7 @@ function Budgets() {
             );
           })}
         </S.Categories>
+        <Footer />
       </Container>
     </>
   );

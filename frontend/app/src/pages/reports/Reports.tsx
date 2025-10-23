@@ -1,16 +1,19 @@
 import { useState } from "react";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+
 import Card from "../../components/cards/Cards";
 import Container from "../../components/conteiners/Container";
 import BarGraph from "../../components/graphs/barGraph/BarGraph";
 import Header from "../../components/header/header";
 import Sidebar from "../../components/sidebar/Sidebar";
-
-import * as S from "./reportsStyle";
-import { BsArrowDown, BsArrowUp } from "react-icons/bs";
-import LineGraph from "../../components/graphs/lineGraph/LineGraps";
 import Footer from "../../components/footer/Footer";
+import LineGraph from "../../components/graphs/lineGraph/LineGraps";
 import Inputs from "../../components/inputs/InputStyles";
 import Buttons from "../../components/buttons/ButtonStyles";
+
+import * as S from "./reportsStyle";
+
+import { formatCurrency } from "../../utils/formatters";
 
 function Reports() {
   const [transactionType, setTransactionType] = useState("expense");
@@ -47,7 +50,9 @@ function Reports() {
     return (
       <Card.DashboardBigCard>
         <Card.BigTitleCard>{title}</Card.BigTitleCard>
-        <Card.CardMoney>$12345</Card.CardMoney>
+        <Card.CardMoney>
+          {formatCurrency(125000, { showPlusForPositive: false })}
+        </Card.CardMoney>
 
         <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
           <Card.LowCardTittle>Last Month</Card.LowCardTittle>
