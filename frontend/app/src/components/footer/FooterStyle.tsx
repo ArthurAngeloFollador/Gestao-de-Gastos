@@ -7,12 +7,13 @@ export const FooterStyled = styled.footer`
   width: 100%;
   background-color: #171717;
   color: #6e737b;
-  padding: 40px 60px;
+  padding: 40px 60px 20px 60px;
   border-top: 1px solid #2a2a2a;
+  margin-top: 40px;
   padding-top: 20px;
 
   @media ${devices.laptop} {
-    width: 1000px;
+    /* width: 1000px; */
   }
 `;
 
@@ -32,16 +33,6 @@ export const LogoAndName = styled.div`
     background: transparent;
     border-radius: 50%;
   }
-`;
-
-export const Rights = styled.div`
-  user-select: none;
-  width: 100%;
-  text-align: center;
-  font-size: 14px;
-  color: #6e737b;
-  border-top: 1px solid #2a2a2a;
-  padding-top: 20px;
 `;
 
 export const LogoContainer = styled.div`
@@ -93,4 +84,13 @@ export const Section = styled.div`
     margin: 0;
     cursor: pointer;
   }
+`;
+
+export const Rights = styled.div`
+  user-select: none;
+  text-align: center;
+  font-size: 14px;
+  color: #6e737b;
+  border-top: 1px solid #2a2a2a;
+  padding-top: 20px;
 `;
