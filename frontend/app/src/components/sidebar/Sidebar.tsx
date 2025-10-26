@@ -4,33 +4,58 @@ import Bank from "../../assets/svgs/icons/bankIcon.svg";
 import Transactions from "../../assets/svgs/icons/transactionsIcon.svg";
 import Dollar from "../../assets/svgs/icons/dollarIcon.svg";
 import Graph from "../../assets/svgs/icons/graphIcon.svg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Sidebar() {
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentPath = location.pathname.substring(1);
+
+  console.log(currentPath);
+
+  function handleClick(NavigateTo: string) {
+    if (NavigateTo) {
+      navigate(`/${NavigateTo}`);
+    }
+  }
 
   return (
     <>
       <S.SidebarStyled>
         <S.SidebarLinks>
-          <S.SidebarLink onClick={() => navigate("/dashboard")}>
+          <S.SidebarLink
+            $isActive={currentPath === "dashboard"}
+            onClick={() => handleClick("dashboard")}
+          >
             <img src={Dashboard} alt="dashboardSidebar" />
             Dashboard
           </S.SidebarLink>
-          <S.SidebarLink onClick={() =>navigate("/accounts")}>
+          <S.SidebarLink
+            $isActive={currentPath === "accounts"}
+            onClick={() => handleClick("accounts")}
+          >
             <img src={Bank} alt="accountsSidebar" />
             Accounts
           </S.SidebarLink>
-          <S.SidebarLink onClick={() =>navigate("/transactions")}>
+          <S.SidebarLink
+            $isActive={currentPath === "transactions"}
+            onClick={() => handleClick("transactions")}
+          >
             <img src={Transactions} alt="transactionsSidebar" />
             Transactions
           </S.SidebarLink>
-          <S.SidebarLink onClick={() =>navigate("/budgets")}>
+          <S.SidebarLink
+            $isActive={currentPath === "budgets"}
+            onClick={() => handleClick("budgets")}
+          >
             <img src={Dollar} alt="budgetsSidebar" />
             Budgets
           </S.SidebarLink>
-          <S.SidebarLink onClick={() =>navigate("/reports")}>
+          <S.SidebarLink
+            $isActive={currentPath === "reports"}
+            onClick={() => handleClick("reports")}
+          >
             <img src={Graph} alt="reportsSidebar" />
             Reports
           </S.SidebarLink>

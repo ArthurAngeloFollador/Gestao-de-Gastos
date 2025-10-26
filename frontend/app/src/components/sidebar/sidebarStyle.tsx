@@ -30,7 +30,7 @@ export const SidebarLinks = styled.div`
   border-right: 1px solid #4d4d4d;
 `;
 
-export const SidebarLink = styled.div`
+export const SidebarLink = styled.div<{ $isActive?: boolean }>`
   cursor: pointer;
   user-select: none;
   display: flex;
@@ -42,6 +42,17 @@ export const SidebarLink = styled.div`
   gap: 8px;
   border-radius: 10px;
   transition: background-color 0.5s ease-in-out;
+
+  background-color: ${(props) => {
+    if (props.$isActive) {
+      return "#3a3a3a92";
+    }
+  }};
+  /* margin-left: ${(props) => {
+    if (props.$isActive) {
+      return ".6rem";
+    }
+  }}; */
 
   & img {
     width: 30px;

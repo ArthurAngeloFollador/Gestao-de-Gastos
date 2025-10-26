@@ -1,6 +1,6 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import Buttons from "../buttons/ButtonStyles";
-import * as S from "./ConteinerStyled";
+import * as S from "./conteinerStyled";
 
 interface props {
   children: React.ReactNode;
