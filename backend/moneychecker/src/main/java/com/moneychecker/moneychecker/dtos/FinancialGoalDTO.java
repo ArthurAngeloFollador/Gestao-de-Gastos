@@ -33,10 +33,10 @@ public record FinancialGoalDTO(
         @NotNull(groups = ValidationGroups.Create.class)
         Date targetDate,
 
-        @ValidEnum(enumClass = PriorityEnum.class, validationGroups = { ValidationGroups.Update.class, ValidationGroups.Create.class })
+        @ValidEnum(enumClass = PriorityEnum.class, groups = { ValidationGroups.Update.class, ValidationGroups.Create.class })
         String priority,
 
-        @ValidEnum(enumClass = StatusEnum.class, validationGroups = { ValidationGroups.Update.class, ValidationGroups.Create.class })
+        @ValidEnum(enumClass = StatusEnum.class, groups = { ValidationGroups.Update.class, ValidationGroups.Create.class })
         String status,
 
         @NotNull(groups = ValidationGroups.Create.class)

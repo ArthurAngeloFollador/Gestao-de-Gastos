@@ -24,7 +24,8 @@ public class LoginController {
     @GetMapping
     @JsonView(GenericJsonViews.Public.class)
     public ResponseEntity<SystemUserDTO> getUser(@RequestBody @Valid SystemUserDTO userDTO) {
-        return systemUserService.getUserDTOByEmailPassword(userDTO.email(), userDTO.passwordHash()).map(ResponseEntity::ok)
+        return systemUserService.getUserDTOByEmailPassword(userDTO.email(), userDTO.passwordHash())
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 }

@@ -7,15 +7,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 
-@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Target({ ElementType.FIELD, ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = EnumValidator.class)
 @Documented
 public @interface ValidEnum {
     Class<? extends Enum<?>> enumClass();
-    
-    String message() default "Enum value not declared in the specified enum";
-    
-    Class<?>[] validationGroups() default {};
-} 
+
+    String message()
+
+    default "Enum value not declared in the specified enum";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
