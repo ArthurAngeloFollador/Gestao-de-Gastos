@@ -1,10 +1,7 @@
 package com.moneychecker.moneychecker.dtos;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-import com.moneychecker.moneychecker.enums.BudgetStatusEnum;
-import com.moneychecker.moneychecker.enums.PeriodTypeEnum;
 import com.moneychecker.moneychecker.utils.ContractDTO;
 import com.moneychecker.moneychecker.utils.ValidationGroups;
 
@@ -12,33 +9,27 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 //@formatter:off
-public record BudgetDTO (
+public record AccountDTO (
         @NotNull(groups = ValidationGroups.Update.class)
         @NotNull(groups = ValidationGroups.Delete.class)
-        Integer budgetId,
+        Integer accountId,
         
         @NotBlank(groups = ValidationGroups.Create.class)
-        String budgetName, 
-        
-        @NotBlank(groups = ValidationGroups.Create.class)
-        PeriodTypeEnum periodType, 
-        
-        @NotNull(groups = ValidationGroups.Create.class)
-        Date startDate, 
-        
-        @NotNull(groups = ValidationGroups.Create.class)
-        Date endDate,
-        
-        @NotNull(groups = ValidationGroups.Create.class)
-        BigDecimal totalBudget,
+        String accountName, 
 
+        @NotBlank(groups = ValidationGroups.Create.class)
+        String bankName, 
+        
+        @NotNull(groups = ValidationGroups.Create.class)
+        BigDecimal currentBalance,
+        
         @NotNull(groups = ValidationGroups.Create.class)
         Integer userCod,
         
-        BudgetStatusEnum active) implements ContractDTO {
+        boolean active) implements ContractDTO {
 
     @Override
     public Integer getId() {
-        return this.budgetId;
+        return this.accountId;
     }
 }
