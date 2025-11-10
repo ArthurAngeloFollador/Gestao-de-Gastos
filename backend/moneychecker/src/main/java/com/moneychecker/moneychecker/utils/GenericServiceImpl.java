@@ -78,7 +78,6 @@ public abstract class GenericServiceImpl<T, ID, DTO extends ContractDTO> impleme
                 || (targetType.equals(Double.class) && sourceType.equals(Double.class));
     }
 
-    
     @Transactional(readOnly = true)
     public List<T> findAll() {
         return repository.findAll();

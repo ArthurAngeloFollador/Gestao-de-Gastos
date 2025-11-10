@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.moneychecker.moneychecker.dtos.SystemUserDTO;
-import com.moneychecker.moneychecker.entities.SystemUser;
 import com.moneychecker.moneychecker.services.SystemUserService;
 import com.moneychecker.moneychecker.utils.GenericJsonViews;
 
@@ -36,8 +35,8 @@ public class UserController {
     @PostMapping
     @Transactional
     @JsonView(GenericJsonViews.Public.class)
-    public SystemUser create(@RequestBody @Valid SystemUserDTO createDTO) {
-        return systemUserService.create(createDTO);
+    public SystemUserDTO create(@RequestBody @Valid SystemUserDTO createDTO) {
+        return systemUserService.createAndGetDTO(createDTO);
     }
 
     @PutMapping

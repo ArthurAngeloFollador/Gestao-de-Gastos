@@ -36,6 +36,4 @@ public class SystemUser {
     @Convert(converter = BooleanToSmallintConverter.class)
     @Column(name = "ACTIVE")
     private boolean active;
-//    @OneToMany(mappedBy = "userCod", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Budget> budgetList = new ArrayList<>();
 }

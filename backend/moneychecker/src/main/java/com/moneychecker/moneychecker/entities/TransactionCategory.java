@@ -1,12 +1,13 @@
 package com.moneychecker.moneychecker.entities;
 
-import java.math.BigDecimal;
-
+import com.moneychecker.moneychecker.enums.TransactionCategoryTypeEnum;
 import com.moneychecker.moneychecker.utils.BooleanToSmallintConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,27 +21,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "ACCOUNTS")
+@Table(name = "TRANSACTION_CATEGORIES")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Account {
+public class TransactionCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_ACCOUNT")
-    @SequenceGenerator(name = "GEN_ACCOUNT", sequenceName = "GEN_ACCOUNT", allocationSize = 1)
-    @Column(name = "ACCOUNT_ID")
-    private Integer accountId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_TRANSACTION_CATEGORIES")
+    @SequenceGenerator(name = "GEN_TRANSACTION_CATEGORIES", sequenceName = "GEN_TRANSACTION_CATEGORIES", allocationSize = 1)
+    @Column(name = "TRANSACTION_CATEGORY_ID")
+    private Integer transactionCategoryId;
 
-    @Column(name = "ACCOUNT_NAME")
-    private String accountName;
+    @Column(name = "CATEGORY_NAME")
+    private String categoryName;
 
-    @Column(name = "BANK_NAME")
-    private String bankName;
-
-    @Column(name = "CURRENT_BALANCE")
-    private BigDecimal currentBalance = BigDecimal.ZERO;
+    @Column(name = "CATEGORY_TYPE")
+    @Enumerated(EnumType.STRING)
+    private TransactionCategoryTypeEnum categoryType;
 
     @Convert(converter = BooleanToSmallintConverter.class)
     @Column(name = "ACTIVE")
