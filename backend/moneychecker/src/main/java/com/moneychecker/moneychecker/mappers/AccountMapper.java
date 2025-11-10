@@ -2,10 +2,10 @@ package com.moneychecker.moneychecker.mappers;
 
 import org.mapstruct.Mapper;
 
-import com.moneychecker.moneychecker.dtos.BudgetDTO;
-import com.moneychecker.moneychecker.entities.Budget;
+import com.moneychecker.moneychecker.dtos.AccountDTO;
+import com.moneychecker.moneychecker.entities.Account;
 import com.moneychecker.moneychecker.utils.GenericMapper;
 
 @Mapper(componentModel = "spring", uses = { SystemUserToIntegerMapper.class })
-public interface BudgetMapper extends GenericMapper<Budget, BudgetDTO> {
+public interface AccountMapper extends GenericMapper<Account, AccountDTO> {
 }

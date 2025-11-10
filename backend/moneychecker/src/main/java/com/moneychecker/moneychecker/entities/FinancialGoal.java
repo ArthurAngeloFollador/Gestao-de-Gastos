@@ -1,5 +1,6 @@
 package com.moneychecker.moneychecker.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.moneychecker.moneychecker.enums.PriorityEnum;
@@ -45,11 +46,11 @@ public class FinancialGoal {
 
     @NotNull
     @Column(name = "TARGET_AMOUNT")
-    private Double targetAmount;
+    private BigDecimal targetAmount;
 
     @NotNull
     @Column(name = "CURRENT_AMOUNT")
-    private Double currentAmount = 0.0;
+    private BigDecimal currentAmount = BigDecimal.ZERO;
 
     @Column(name = "TARGET_DATE")
     private LocalDate targetDate;
@@ -68,6 +69,6 @@ public class FinancialGoal {
     private boolean active = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_COD", referencedColumnName = "USER_ID", insertable = false, updatable = false)
+    @JoinColumn(name = "USER_COD", referencedColumnName = "USER_ID")
     private SystemUser systemUser;
 }
