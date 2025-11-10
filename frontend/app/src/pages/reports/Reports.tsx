@@ -18,15 +18,6 @@ import { formatCurrency } from "../../utils/formatters";
 function Reports() {
   const [transactionType, setTransactionType] = useState("expense");
 
-  // Just for testing before database
-  const OnClickSpending = () => {
-    setTransactionType("expense");
-  };
-
-  const OnClickIncome = () => {
-    setTransactionType("income");
-  };
-
   //   TODO: add media queries
   // Graphics Cards
   interface GraphProps {
@@ -84,24 +75,6 @@ function Reports() {
         hasButton={false}
       >
         <S.ContentContainer>
-          <S.ReportTypes>
-            <S.ReportType
-              onClick={() => OnClickSpending()}
-              className={
-                transactionType === "expense" ? "active" : transactionType
-              }
-            >
-              Spending
-            </S.ReportType>
-            <S.ReportType
-              onClick={() => OnClickIncome()}
-              className={
-                transactionType === "income" ? "active" : transactionType
-              }
-            >
-              Income
-            </S.ReportType>
-          </S.ReportTypes>
 
           {/* Spending Card */}
           <S.CardsContainer>
@@ -116,9 +89,9 @@ function Reports() {
               <Card.InputContainer>
                 <Card.LowCardTittle>Report Type</Card.LowCardTittle>
 
-                <Card.InputOptions>
-                  <option selected>Spending by Category</option>
-                  <option>Income</option>
+                <Card.InputOptions value={transactionType} onChange={(e) => setTransactionType(e.target.value)}>
+                  <option value={"expense"} selected>Spending</option>
+                  <option value={"income"}>Income</option>
                 </Card.InputOptions>
               </Card.InputContainer>
 

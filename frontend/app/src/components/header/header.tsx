@@ -1,36 +1,53 @@
 import { useNavigate } from "react-router";
-import { HeaderStyled, Logo, HeaderButtons } from "./header_Style";
-import Buttons from "../buttons/ButtonStyles";
+import { useRef, useState } from "react";
+
 import { useAuth } from "../../hooks/useAuth";
+
+import { HeaderStyled, Logo, HeaderButtons, ProfilePic } from './header_Style';
+import Buttons from "../buttons/ButtonStyles";
+import ProfileDropDownMenu from "../modals/profileDropDownMenu/profileDropDown";
+
+import LogoNoBg from "../../assets/imgs/logo_no_bg.png";
+import ProfilePicture from "../../assets/imgs/ProfilePic.png"
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 function Header() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth(); // pegando user e logout do hook
+  const { isAuthenticated } = useAuth();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null); //  Ref to the dropdown menu
+
+  // Close the dropdown menu if the user clicks outside
+  useOutsideClick(dropdownRef, () => setIsOpen(false));
 
   const onLogoClick = () => navigate("/");
+
+  // Function to open the dropdown menu
+  function onClickProfilePic() {
+    setIsOpen(!isOpen);
+  }
 
   return (
     <HeaderStyled>
       <Logo>
-        <img src="./src/assets/imgs/logo_no_bg.png" alt="logo" />
+        <img src={LogoNoBg} />
         <h1 onClick={() => onLogoClick()}>MoneyControl</h1>
       </Logo>
 
-      {/* <Links>
-        <p onClick={() => navigate("/dashboard")}>Dashboard</p>
-        <p onClick={() => navigate("/about")}>About</p>
-        <p onClick={() => navigate("/prices")}>Prices</p>
-        <p onClick={() => navigate("/contact")}>Contact</p>
-      </Links> */}
-
       <HeaderButtons>
-        {user ? (
-          <>
-            {console.log("batata")}
+        {isAuthenticated ? (
 
-            <Buttons.Small onClick={logout}>Sair</Buttons.Small>
-          </>
+          <div style={{position: "relative"}} ref={dropdownRef}>
+            <ProfilePic>
+              <img src={ProfilePicture} onClick={onClickProfilePic} />
+            </ProfilePic>
+            {/* Dropdown menu */}
+              <ProfileDropDownMenu isOpen={isOpen}/>
+          </div>
+
         ) : (
+
           <>
             <Buttons.SmallBlinking onClick={() => navigate("/login")}>
               Log In
@@ -39,7 +56,9 @@ function Header() {
               Sign Up
             </Buttons.Small>
           </>
+
         )}
+
       </HeaderButtons>
     </HeaderStyled>
   );

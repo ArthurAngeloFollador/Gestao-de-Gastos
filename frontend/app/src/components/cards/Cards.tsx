@@ -381,7 +381,7 @@ interface CardComponent extends React.FC<CardProps> {
   DivBalances: React.FC<SubCardProps>;
   ReportOptionsCard: React.FC<SubCardProps>;
   InputContainer: React.FC<SubCardProps>;
-  InputOptions: React.FC<SubCardProps>;
+  InputOptions: React.FC<SubCardInputProps>;
 }
 
 const Card: CardComponent = ({ children }) => {
@@ -486,8 +486,22 @@ Card.InputContainer = ({ children, ...rest }) => (
   <InputContainer {...rest}>{children}</InputContainer>
 );
 
-Card.InputOptions = ({ children, ...rest }) => (
-  <InputOptions {...rest}>{children}</InputOptions>
+  interface SubCardInputProps extends SubCardProps {
+    value: string;
+    onChange: (value: string) => void;
+  }
+
+Card.InputOptions = ({ children, value, onChange }: SubCardInputProps) => (
+  <InputOptions value={value} onChange={(e) => onChange(e.target.value)}>
+        {children}</InputOptions>
 );
+
+  // const SubCard: React.FC<SubCardProps> = ({ children, value, onChange }) => {
+  //   return(
+  //     <select value={value} onChange={onChange}>
+  //       {children}
+  //     </select>
+  //   )
+  // }
 
 export default Card;

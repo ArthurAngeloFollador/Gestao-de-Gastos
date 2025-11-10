@@ -33,17 +33,23 @@ export const Logo = styled.div`
   }
 `;
 
-// export const Links = styled.div`
-//   display: flex;
-//   gap: 50px;
-
-//   & p {
-//     cursor: pointer;
-//   }
-// `;
-
 export const HeaderButtons = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+`;
+
+export const ProfilePic = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2rem;
+
+  & img {
+    position: absolute;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
 `;

@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import { typeUserEnum } from "./constants/enums/typeUserEnum.tsx";
+
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import InitialPage from "./pages/initialPage/InitialPage.tsx";
-// import PrivateRoute from "./components/PrivateRoute.tsx";
+import PrivateRoute from "./components/PrivateRoute.tsx";
 import About from "./pages/about/About.tsx";
 import Accounts from "./pages/accounts/Accounts.tsx";
 import Prices from "./pages/prices/Prices.tsx";
@@ -33,52 +34,44 @@ function AppRouter() {
           <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Private routes */}
-          {/* <Route
-            path="/login/admin"
-            element={
-              <PrivateRoute accesControl={[typeUserEnum.ADMIN]}>
-                <Login />
-              </PrivateRoute>
-            }
-          /> */}
           <Route
             path="/dashboard"
             element={
-              // <PrivateRoute accesControl={[typeUserEnum.ADMIN, typeUserEnum.USER]}>
+              <PrivateRoute>
                 <Dashboard />
-              // </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/transactions"
             element={
-              // <PrivateRoute accesControl={[typeUserEnum.ADMIN, typeUserEnum.USER]}>
+              <PrivateRoute>
                 <Transactions />
-              // </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/accounts"
             element={
-              // <PrivateRoute accesControl={[typeUserEnum.USER]}>
+              <PrivateRoute>
                 <Accounts />
-              // </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/budgets"
             element={
-              // <PrivateRoute accesControl={[typeUserEnum.USER]}>
+              <PrivateRoute>
                 <Budgets />
-              // </PrivateRoute>
+              </PrivateRoute>
             }
           />
           <Route
             path="/reports"
             element={
-              // <PrivateRoute accesControl={[typeUserEnum.USER]}>
+              <PrivateRoute>
                 <Reports />
-              // </PrivateRoute>
+              </PrivateRoute>
             }
           />
 
