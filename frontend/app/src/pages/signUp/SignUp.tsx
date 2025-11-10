@@ -4,7 +4,6 @@ import LogoNoBg from "../../assets/imgs/logo_no_bg.png";
 import Inputs from "../../components/inputs/InputStyles.tsx";
 import { useNavigate } from "react-router";
 import Buttons from "../../components/buttons/ButtonStyles";
-import type { AuthContextType } from "../../contexts/AuthContext";
 import { useAuth } from "../../hooks/useAuth.ts";
 
 import {
@@ -16,13 +15,15 @@ import {
 
 function SignUp() {
   const navigate = useNavigate();
-  const { signupUser }: AuthContextType = useAuth();
 
-  const [username, setUsername]: [string, (username: string) => void] =
-    useState("");
-  const [email, setEmail]: [string, (email: string) => void] = useState("");
-  const [password, setPassword]: [string, (password: string) => void] =
-    useState("");
+  const { signup } = useAuth();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    passwordHash: "",
+  });
+
   const [confirmPassword, setConfirmPassword]: [
     string,
     (confirmPassword: string) => void
@@ -34,22 +35,28 @@ function SignUp() {
   ] = useState("");
 
   const onSignUpClick = async () => {
-    if (!username || !email || !password || !password || !confirmPassword) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.passwordHash ||
+      !confirmPassword
+    ) {
       setErrorMessage("Please fill in all fields");
       return;
     }
 
-    if(confirmPassword !== password) {
+    if (confirmPassword !== formData.passwordHash) {
       setErrorMessage("Passwords do not match");
       return;
     }
 
-    const response = await signupUser(username, email, password);
-
-    if ("error" in response) {
-      setErrorMessage(response.error);
-    } else {
-      navigate("/login");
+    // Try to signup
+    try {
+      await signup(formData.name, formData.email, formData.passwordHash);
+      navigate("/dashboard");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      setErrorMessage(error.message || "Error during signup");
     }
   };
 
@@ -64,26 +71,26 @@ function SignUp() {
       <InputContainer>
         <Inputs.Large
           type="text"
-          placeholder="Username"
-          value={username}
+          placeholder="name"
+          value={formData.name}
           onChange={(e) => {
-            setUsername(e.target.value);
+            setFormData({ ...formData, name: e.target.value });
           }}
         />
         <Inputs.Large
           type="email"
           placeholder="Email"
-          value={email}
+          value={formData.email}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setFormData({ ...formData, email: e.target.value });
           }}
         />
         <Inputs.Large
           type="password"
           placeholder="Password"
-          value={password}
+          value={formData.passwordHash}
           onChange={(e) => {
-            setPassword(e.target.value);
+            setFormData({ ...formData, passwordHash: e.target.value });
           }}
         />
         <Inputs.Large

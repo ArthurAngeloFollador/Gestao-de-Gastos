@@ -10,40 +10,35 @@ import Buttons from "../../components/buttons/ButtonStyles";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import type { AuthContextType } from "../../contexts/AuthContext";
 import ArrowBack from "../../components/arrowBack/ArrowBack";
 
 function Login() {
   const navigate = useNavigate();
-  const { userLogin }: AuthContextType = useAuth();
+  const { login } = useAuth();
 
-  const [email, setEmail]: [string, (email: string) => void] = useState("");
-  const [password, setPassword]: [string, (password: string) => void] =
-    useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    passwordHash: "",
+  });
+
   const [errorMessage, setErrorMessage]: [
     string,
     (errorMessage: string) => void
   ] = useState("");
 
   async function onLogInClick() {
-    if (!email || !password) {
+    if (!formData.email || !formData.passwordHash) {
       setErrorMessage("Please fill in all fields");
       return;
     }
 
-    const response = await userLogin(email, password);
-
-    if ("error" in response) {
-      setErrorMessage(response.error);
-    } else {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          name: userLogin.name,
-          type: "USER",
-        })
-      );
+    // Try to login
+    try {
+      await login(formData.email, formData.passwordHash);
       navigate("/dashboard");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      setErrorMessage(error.message || "Error during signup");
     }
   }
 
@@ -59,17 +54,17 @@ function Login() {
         <Inputs.Large
           type="email"
           placeholder="Email"
-          value={email}
+          value={formData.email}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setFormData({ ...formData, email: e.target.value });
           }}
         />
         <Inputs.Large
           type="password"
           placeholder="Password"
-          value={password}
+          value={formData.passwordHash}
           onChange={(e) => {
-            setPassword(e.target.value);
+            setFormData({ ...formData, passwordHash: e.target.value });
           }}
         />
         <a

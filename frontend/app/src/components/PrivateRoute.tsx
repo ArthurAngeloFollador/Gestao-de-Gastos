@@ -1,35 +1,17 @@
-import { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { typeUserEnum } from "../constants/enums/typeUserEnum";
 import { Navigate } from "react-router";
 
 interface Props {
   children: React.ReactNode;
-  accesControl: typeUserEnum[] | undefined;
 }
 
-function PrivateRoute({ children, accesControl }: Props) {
-  const [ready, setReady] = useState(false);
-  const { user, onLoadUser } = useAuth();
+function PrivateRoute({ children }: Props) {
+  const { user, isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    onLoadUser();
-    setReady(true);
-  }, [onLoadUser]);
+  // if user is not authenticated, redirect to initial page
+  if (!isAuthenticated || !user) return <Navigate to="/" />;
 
-  if (!ready) {
-    return <div>Loading...</div>;
-  }
-
-  if (!user) {
-    if (accesControl && !accesControl.includes(typeUserEnum.USER)) {
-      return <Navigate to="/login/admin" />;
-    }
-    return <Navigate to="/login" />;
-  }
-  if (accesControl && !accesControl.includes(user.role)) {
-    return <Navigate to="/unauthorized" />;
-  }
+  // if user is authenticated
   return <>{children}</>;
 }
 

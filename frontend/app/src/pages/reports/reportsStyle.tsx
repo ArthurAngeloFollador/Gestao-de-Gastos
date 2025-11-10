@@ -12,35 +12,6 @@ export const ContentContainer = styled.div`
   gap: 20px;
 `;
 
-export const ReportTypes = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: start;
-  border-bottom: 1px solid #696969;
-`;
-
-export const ReportType = styled.p`
-  cursor: pointer;
-  color: #696969;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 1.5rem 0;
-  transition: all 0.2s ease-in;
-
-  &:hover {
-    color: #9b9b9b;
-  }
-
-  &.active {
-    color: aqua;
-    border-bottom: 2px solid aqua;
-  }
-`;
-
 export const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
