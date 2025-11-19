@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 
 //@formatter:off
 public record SystemUserDTO(
-        @JsonView(GenericJsonViews.Internal.class)
+        @JsonView(GenericJsonViews.Public.class)
         @Null(groups = ValidationGroups.Create.class)
         @NotNull(groups = ValidationGroups.Update.class)
         Integer userId,
