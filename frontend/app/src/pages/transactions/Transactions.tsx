@@ -69,7 +69,7 @@ function Transactions() {
         title="Transactions"
         hasButton={true}
         buttonText="New Transaction"
-        hasPlusIcon={true}
+        // hasPlusIcon={true}
       >
         <S.FilterContainer>
           <S.Filter>

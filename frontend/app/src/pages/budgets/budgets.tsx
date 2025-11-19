@@ -79,7 +79,7 @@ function Budgets() {
       <Container
         title="Budgets"
         hasButton={true}
-        hasPlusIcon={true}
+        // hasPlusIcon={true}
         buttonText="New Budget"
       >
         {/* Overview */}

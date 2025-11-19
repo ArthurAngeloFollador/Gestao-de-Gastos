@@ -16,6 +16,7 @@ interface accountsInterface {
 }
 
 function Accounts() {
+
   const accounts: accountsInterface[] = [
     {
       id: 1,
@@ -47,7 +48,7 @@ function Accounts() {
         title="Accounts"
         hasButton={true}
         buttonText="Add Account"
-        hasPlusIcon={true}
+        // hasPlusIcon={true}
       >
         <S.Accountsdiv>
           {accounts.map((account) => {

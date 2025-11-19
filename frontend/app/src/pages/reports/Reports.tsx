@@ -17,6 +17,7 @@ import { formatCurrency } from "../../utils/formatters";
 
 function Reports() {
   const [transactionType, setTransactionType] = useState("expense");
+  const [dateRange, setDateRange] = useState("lastMonth");
 
   //   TODO: add media queries
   // Graphics Cards
@@ -98,12 +99,12 @@ function Reports() {
               <Card.InputContainer>
                 <Card.LowCardTittle>Date Range</Card.LowCardTittle>
 
-                <Card.InputOptions>
-                  <option selected>Last 30 Days</option>
-                  <option>Last 3 Months</option>
-                  <option>Last 6 Months</option>
-                  <option>Last Year</option>
-                  <option>All Time</option>
+                <Card.InputOptions value={dateRange} onChange={(e) => setDateRange(e.target.value)}>
+                  <option value="lastMonth">Last 30 Days</option>      
+                  <option value="last3Months">Last 3 Months</option>
+                  <option value="last6Months">Last 6 Months</option>
+                  <option value="lastYear">Last Year</option>
+                  <option value="allTime">All Time</option>
                 </Card.InputOptions>
               </Card.InputContainer>
               <S.CheckboxContainer>
