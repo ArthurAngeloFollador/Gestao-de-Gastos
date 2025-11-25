@@ -9,6 +9,7 @@ import Buttons from "../buttons/ButtonStyles";
 import { CiBellOn } from "react-icons/ci";
 
 import ProfileDropDownMenu from "../modals/profileDropDownMenu/profileDropDown";
+import NotificationsDropDownMenu from "../modals/notificationsDropDownMenu/notificationsDropDownMenu";
 
 import LogoNoBg from "../../assets/imgs/logo_no_bg.png";
 import ProfilePicture from "../../assets/imgs/ProfilePic.png";
@@ -18,7 +19,8 @@ function Header() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);//for profilepic dropdown
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null); //  Ref to the dropdown menu
 
   // for the future
@@ -34,6 +36,11 @@ function Header() {
   function onClickProfilePic() {
     setIsOpen(!isOpen);
   }
+
+  function onClickNotification() {
+    setIsNotificationOpen(!isNotificationOpen);
+  }
+
   // for the future
   // function handleNotification() {
   //   if(hasNotification){
@@ -52,9 +59,11 @@ function Header() {
 
       <S.HeaderButtons>
         {isAuthenticated ? (
+          <>
           <S.ProfilePicToBell>
+            {/* Notifications menu */}
             <S.BellWrapper>
-              <CiBellOn size={30} color="#f0f0f0" />
+              <CiBellOn size={30} color="#f0f0f0" onClick={() => onClickNotification()} />
             </S.BellWrapper>
             <div style={{ position: "relative" }} ref={dropdownRef}>
               <S.ProfilePic>
@@ -64,6 +73,8 @@ function Header() {
               <ProfileDropDownMenu isOpen={isOpen} />
             </div>
           </S.ProfilePicToBell>
+            <NotificationsDropDownMenu isOpen={isNotificationOpen} onClose={() => setIsNotificationOpen(false)} ref={dropdownRef} />
+          </>
         ) : (
           <>
             <Buttons.SmallBlinking onClick={() => navigate("/login")}>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { type InputHTMLAttributes } from "react";
+import { forwardRef, type InputHTMLAttributes } from "react";
 import Checked from "../../assets/imgs/check_42dp_E3E3E3_FILL0_wght400_GRAD0_opsz40.png";
 
 const BaseInput = styled.input`
@@ -127,9 +127,8 @@ Inputs.Checkbox = ({ ...props }: InputProps) => {
   return <CheckboxInput {...props} />;
 };
 
-Inputs.ModalMD = ({ ...props }: InputProps) => {
-  return <ModalMDInput {...props} />;
-};
+Inputs.ModalMD = forwardRef<HTMLInputElement, InputProps>((props, ref) =>
+ <ModalMDInput {...props} ref={ref} />);
 
 Inputs.ModalSubmit = ({ ...props }: InputProps) => {
   return <ModalSubmitInput {...props} />;

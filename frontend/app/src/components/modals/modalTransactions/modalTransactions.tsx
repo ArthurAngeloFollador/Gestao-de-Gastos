@@ -1,6 +1,9 @@
+import React from "react";
 import { forwardRef } from "react";
 
+import { useAuth } from "../../../hooks/useAuth";
 import useOutsideClick from "../../../hooks/useOutsideClick";
+
 import Modal from '../modalStyles';
 import Input from '../../inputs/InputStyles';
 
@@ -13,9 +16,34 @@ const ModalTransactions = forwardRef<HTMLDivElement, Props>(
   ({ isOpen, onClose }, ref) => {
     useOutsideClick(ref as React.RefObject<HTMLDivElement>, onClose);
 
-    function handleSubmit(){
-        return;
-    }
+    const { createTransaction } = useAuth();
+
+    // TODO check the useAuth hook
+    // handle form values
+    const descriptionRef = React.useRef<HTMLInputElement>(null);
+    const amountRef = React.useRef<HTMLInputElement>(null);
+    const dateRef = React.useRef<HTMLInputElement>(null);
+    const categoryRef = React.useRef<HTMLInputElement>(null);
+    const accountRef = React.useRef<HTMLInputElement>(null);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      try {
+        createTransaction(
+          descriptionRef.current?.value || "", //if value is null, use empty string
+          Number(amountRef.current?.value || 0), //convert string to number
+          categoryRef.current?.value || "",
+          new Date(dateRef.current?.value || ""), //convert string to Date
+          accountRef.current?.value || "",
+          19,
+        );
+        onClose();
+      } catch (error) {
+        console.log(error);
+      }
+
+    };
 
     if (!isOpen) return null;
 
@@ -24,7 +52,7 @@ const ModalTransactions = forwardRef<HTMLDivElement, Props>(
         <Modal.Wrapper>
           <Modal.Base ref={ref}>
             <Modal.Title>Add a New Transaction</Modal.Title>
-            <Modal.Form onSubmit={() => handleSubmit()}>
+            <Modal.Form onSubmit={handleSubmit}>
                 <Modal.InputWrapper>
                     <Modal.InputTitle>Description</Modal.InputTitle>
                     <Input.ModalMD type="text" placeholder="e.g., Monthly Rent" />

@@ -4,33 +4,28 @@ import LoadingContainer from "./LoadingPageStyle";
 import { useLocation } from "react-router-dom";
 
 function LoadingPage({ children }: { children: React.ReactNode }) {
-    
-    const location = useLocation();
+  const location = useLocation();
+  const [loading, setLoading] = useState(true);
 
-    const [loading, setLoading] = useState(false);
-    
-   useEffect(() => {
+  useEffect(() => {
     setLoading(true);
-    
+
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [location]);
+  }, [location.pathname]);
 
+  if (loading) {
     return (
-        <>
-            {loading ? (
-                <LoadingContainer>
-                    <HashLoader color="#36d7b7" loading={loading} size={100} />
-                </LoadingContainer>
-            ) : (
-                <>{children}</>
-            )}
-        </>
-    )
+      <LoadingContainer>
+        <HashLoader color="#36d7b7" size={100} />
+      </LoadingContainer>
+    );
+  }
 
+  return <div key={location.pathname}>{children}</div>;
 }
 
-  export default LoadingPage;
+export default LoadingPage;

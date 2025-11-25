@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
+import React from "react";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -12,6 +13,7 @@ const ModalWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
 
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(5px);
@@ -59,7 +61,7 @@ const FormModal = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
- appearance: none;
+  appearance: none;
   -webkit-appearance: none;
   margin-top: 1.8rem;
 `;
@@ -85,9 +87,36 @@ const ButtonsInputsWrapper = styled.div`
   align-items: center;
 `;
 
+// Notifications Dropdown
+const NotificationBase = styled(ModalBase)`
+  display: flex;
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  min-height: 100px;
+  height: auto;
+  width: 350px;
+  align-content: center;
+  padding: 1rem 0 9rem 0;
+`;
+
+const NotificationContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+`;
+
+const Notification = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+`;
+
 type Props = {
   children: React.ReactNode;
-};
+}
 
 interface FormProps extends Props {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -99,11 +128,15 @@ Modal.Wrapper = ({ children }: Props) => (
   <ModalWrapper>{children}</ModalWrapper>
 );
 
-Modal.Base = forwardRef<HTMLDivElement, Props>(({ children }, ref) => <ModalBase ref={ref}>{children}</ModalBase>);
+Modal.Base = forwardRef<HTMLDivElement, Props>(({ children }, ref) => (
+  <ModalBase ref={ref}>{children}</ModalBase>
+));
 
 Modal.Title = ({ children }: Props) => <ModalTitle>{children}</ModalTitle>;
 
-Modal.Form = ({ children, onSubmit }: FormProps) => <FormModal onSubmit={onSubmit}>{children}</FormModal>;
+Modal.Form = ({ children, onSubmit }: FormProps) => (
+  <FormModal onSubmit={onSubmit}>{children}</FormModal>
+);
 
 Modal.InputWrapper = ({ children }: Props) => (
   <InputWrapper>{children}</InputWrapper>
@@ -113,6 +146,20 @@ Modal.InputTitle = ({ children }: Props) => <InputTitle>{children}</InputTitle>;
 
 Modal.ButtonsInputsWrapper = ({ children }: Props) => (
   <ButtonsInputsWrapper>{children}</ButtonsInputsWrapper>
+);
+
+Modal.NotificationBase = forwardRef<HTMLDivElement, Props>(
+  ({ children }, ref) => (
+    <NotificationBase ref={ref}>{children}</NotificationBase>
+  )
+);
+
+Modal.NotificationContent = ({ children }: Props) => (
+  <NotificationContent>{children}</NotificationContent>
+);
+
+Modal.Notification = ({ children }: Props) => (
+  <Notification>{children}</Notification>
 );
 
 export default Modal;
