@@ -17,6 +17,7 @@ import LoadingPage from "./pages/loadingPage/LoadingPage.tsx";
 import Transactions from "./pages/transactions/Transactions.tsx";
 import Budgets from "./pages/budgets/budgets.tsx";
 import Reports from "./pages/reports/Reports.tsx";
+import HelpSuport from "./pages/Help&Suport/helpSuport.tsx";
 
 function AppRouter() {
   return (
@@ -32,6 +33,7 @@ function AppRouter() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/help" element={<HelpSuport />} />
 
           {/* Private routes */}
           <Route

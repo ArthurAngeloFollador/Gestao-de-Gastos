@@ -16,10 +16,35 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+
   login: (email: string, passwordHash: string) => Promise<void>;
   signup: (name: string, email: string, passwordHash: string) => Promise<void>;
   logout: () => void;
   setUser: (user: User) => void;
+
+  createAccount: (
+    accountName: string,
+    bankName: string,
+    currentBalance: number,
+    userCod: number
+  ) => Promise<void>;
+
+  createTransaction: (
+    name: string,
+    amount: number,
+    description: string,
+    transactionDate: Date,
+    account: string,
+    userCod: number
+  ) => Promise<void>;
+
+  createBudget: (
+    name: string,
+    startDate: Date,
+    endDate: Date,
+    amount: number,
+    userCod: number
+  ) => Promise<void>;
 }
 
 export const useAuth = create<AuthState>()(
@@ -38,7 +63,7 @@ export const useAuth = create<AuthState>()(
             email,
             passwordHash,
           };
-          const response = await api.post("/cadastros/usuario", payload);
+          const response = await api.post("/login", payload);
 
           const data = response.data;
 
@@ -52,7 +77,7 @@ export const useAuth = create<AuthState>()(
             set({
               user: {
                 id: data.userId,
-                name: data.name ?? "Usuário",
+                name: data.name ?? "User",
                 email: data.email,
                 passwordHash: data.passwordHash,
               },
@@ -73,7 +98,7 @@ export const useAuth = create<AuthState>()(
             email,
             passwordHash,
           };
-          const response = await api.post("/cadastros/usuario", payload);
+          const response = await api.post("/signup", payload);
           const data = response.data;
 
           // Error handling
@@ -106,6 +131,58 @@ export const useAuth = create<AuthState>()(
       },
       setUser: (user: User | null) => {
         set({ user });
+      },
+
+      createAccount: async (
+        accountName: string,
+        bankName: string,
+        currentBalance: number,
+        userCod
+      ) => {
+        const payload = {
+          accountName,
+          bankName,
+          currentBalance,
+          userCod,
+        };
+        await api.post("/register/account", payload);
+      },
+
+      createTransaction: async (
+        name: string,
+        amount: number,
+        description: string,
+        transactionDate: Date,
+        account: string,
+        userCod: number
+      ) => {
+        const payload = {
+          name,
+          amount,
+          description,
+          transactionDate,
+          account,
+          userCod,
+        };
+        await api.post("/movement/transaction", payload);
+      },
+      
+      createBudget: async (
+        // backend error in budgets
+        name: string,
+        startDate: Date,
+        endDate: Date,
+        amount: number,
+        userCod: number
+      ) => {
+        const payload = {
+          name,
+          startDate,
+          endDate,
+          amount,
+          userCod,
+        };
+        await api.post("/cadastros/orcamento", payload);
       },
     }),
     {
