@@ -7,11 +7,29 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.moneychecker.moneychecker.entities.Transaction;
+import com.moneychecker.moneychecker.projections.ValueByCategory;
 import com.moneychecker.moneychecker.projections.ValueByMonth;
 
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
     // @formatter:off
+    @Query(value = """
+            SELECT
+                TC.TRANSACTION_CATEGORY_ID AS CATEGORYID,
+                TC.CATEGORY_NAME AS CATEGORYNAME,
+                T.AMOUNT AS AMOUNT
+            FROM
+                TRANSACTIONS T
+            INNER JOIN TRANSACTION_CATEGORIES TC ON
+                TC.TRANSACTION_CATEGORY_ID = T.TRANSACTION_CATEGORY_COD
+            INNER JOIN ACCOUNTS A ON A.ACCOUNT_ID = ?2
+            WHERE
+                TC.CATEGORY_TYPE = ?1;
+            """, nativeQuery = true)
+    List<ValueByCategory> getTransactionValuesByCategory(
+            @Param("categoryTypeEnum") String categoryType,
+            @Param("accountId") Integer accountId);
+
     @Query(value = """
             SELECT
                 EXTRACT(MONTH FROM T.TRANSACTION_DATE) AS REFERENCE_MONTH,
@@ -24,7 +42,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
             WHERE
                 TC.CATEGORY_TYPE = ?1;
             """, nativeQuery = true)
-    List<ValueByMonth> getTransactionValuesByCategoryType(
+    List<ValueByMonth> getTransactionValuesByMonth(
             @Param("categoryTypeEnum") String categoryType,
             @Param("accountId") Integer accountId);
     // @formatter:on

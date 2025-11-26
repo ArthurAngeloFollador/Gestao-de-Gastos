@@ -22,6 +22,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Table(name = "BUDGETS")
@@ -29,6 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor 
+@NoArgsConstructor 
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GEN_BUDGET")

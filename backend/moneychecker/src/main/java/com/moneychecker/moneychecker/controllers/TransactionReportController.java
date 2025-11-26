@@ -15,8 +15,13 @@ public class TransactionReportController {
     @Autowired
     TransactionService transactionService;
 
-    @GetMapping("/{accountId}/{categoryType}")
+    @GetMapping("/by-month/{accountId}/{categoryType}")
     public Object getValuesByMonth(@PathVariable Integer accountId, @PathVariable String categoryType) {
+        return transactionService.findTransactionsByMonth(categoryType, accountId);
+    }
+
+    @GetMapping("/by-category/{accountId}/{categoryType}")
+    public Object getValuesByCategory(@PathVariable Integer accountId, @PathVariable String categoryType) {
         return transactionService.findTransactionsByCategory(categoryType, accountId);
     }
 }

@@ -15,10 +15,10 @@ public record AccountDTO (
         Integer accountId,
         
         @NotBlank(groups = ValidationGroups.Create.class)
-        String accountName, 
+        String accountName,
 
         @NotBlank(groups = ValidationGroups.Create.class)
-        String bankName, 
+        String bankName,
         
         @NotNull(groups = ValidationGroups.Create.class)
         BigDecimal currentBalance,

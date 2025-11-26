@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.moneychecker.moneychecker.dtos.BudgetDTO;
 import com.moneychecker.moneychecker.services.BudgetService;
+import com.moneychecker.moneychecker.utils.GenericJsonViews;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/cadastros/orcamento")
+@RequestMapping("/register/budgets")
 public class BudgetController {
 
     @Autowired
@@ -37,6 +39,7 @@ public class BudgetController {
     }
 
     @GetMapping
+    @JsonView(GenericJsonViews.Public.class)
     public Page<BudgetDTO> getBudgets(@PageableDefault(size = 10) Pageable pageable) {
         return budgetService.findAll(pageable);
     }
