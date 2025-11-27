@@ -18,6 +18,7 @@ import Transactions from "./pages/transactions/Transactions.tsx";
 import Budgets from "./pages/budgets/budgets.tsx";
 import Reports from "./pages/reports/Reports.tsx";
 import HelpSuport from "./pages/Help&Suport/helpSuport.tsx";
+import PublicRoute from "./components/PublicRoute.tsx";
 
 function AppRouter() {
   return (
@@ -25,7 +26,15 @@ function AppRouter() {
       <LoadingPage>
         <Routes>
           {/* Public routes */}
-          <Route path="/" element={<InitialPage />} />
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <InitialPage />
+              </PublicRoute>
+            }
+          />
+          
           <Route path="/unauthorized" element={<Unauthorized />} />
           <Route path="/about" element={<About />} />
           <Route path="/prices" element={<Prices />} />
