@@ -6,6 +6,7 @@ import useOutsideClick from "../../../hooks/useOutsideClick";
 
 import Modal from '../modalStyles';
 import Input from '../../inputs/InputStyles';
+import toast from "react-hot-toast";
 
 interface Props {
   isOpen: boolean;
@@ -28,6 +29,16 @@ const ModalTransactions = forwardRef<HTMLDivElement, Props>(
 
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
+      if(
+        !descriptionRef.current?.value ||
+        !amountRef.current?.value ||
+        !dateRef.current?.value ||
+        !categoryRef.current?.value ||
+        !accountRef.current?.value
+      ) {
+        return toast.error("Please fill in all fields");
+      }
 
       try {
         createTransaction(

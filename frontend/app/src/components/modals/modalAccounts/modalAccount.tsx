@@ -3,6 +3,7 @@ import Modal from "../modalStyles";
 import useOutsideClick from "../../../hooks/useOutsideClick";
 import Inputs from "../../inputs/InputStyles";
 import { useAuth } from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 interface Props {
   isOpen: boolean;
@@ -21,6 +22,14 @@ const ModalAccount = forwardRef<HTMLDivElement, Props>(
 
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+
+      if (
+        !accountName ||
+        !bankName ||
+        !currentBalance
+      ) {
+        return toast.error("Please fill in all fields");
+      }
 
       try {
         createAccount(

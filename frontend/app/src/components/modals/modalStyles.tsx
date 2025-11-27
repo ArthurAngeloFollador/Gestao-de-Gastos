@@ -9,6 +9,7 @@ const ModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   color: #f0f0f0;
+  overflow-y: scroll;
 
   display: flex;
   align-items: center;
@@ -79,6 +80,12 @@ const InputWrapper = styled.div`
   margin-bottom: 1rem;
 `;
 
+const DatesInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+`;
+
 // submit & cancel
 const ButtonsInputsWrapper = styled.div`
   display: flex;
@@ -146,6 +153,10 @@ Modal.InputTitle = ({ children }: Props) => <InputTitle>{children}</InputTitle>;
 
 Modal.ButtonsInputsWrapper = ({ children }: Props) => (
   <ButtonsInputsWrapper>{children}</ButtonsInputsWrapper>
+);
+
+Modal.DatesInputContainer = ({ children }: Props) => (
+  <DatesInputContainer>{children}</DatesInputContainer>
 );
 
 Modal.NotificationBase = forwardRef<HTMLDivElement, Props>(

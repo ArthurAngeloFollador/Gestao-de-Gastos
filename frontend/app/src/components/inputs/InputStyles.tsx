@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { forwardRef, type InputHTMLAttributes } from "react";
+import { forwardRef, type InputHTMLAttributes, type SelectHTMLAttributes } from "react";
 import Checked from "../../assets/imgs/check_42dp_E3E3E3_FILL0_wght400_GRAD0_opsz40.png";
 
 const BaseInput = styled.input`
@@ -82,10 +82,60 @@ const ModalMDInput = styled(BaseInput)`
   height: 45px;
   margin-bottom: 1rem;
 
-  /* &[type="date"]{
-   
-  } */
+  /* remove spinners (Chrome, Safari, Opera, Edge) */
+  &[type="number"]::-webkit-inner-spin-button,
+  &[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  /* remove spinners (Firefox) */
+  &[type="number"] {
+    appearance: none;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+  }
+`;
+
+const ModalDatesInput = styled(BaseInput).attrs({ type: "date" })`
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 18px;
+  width: 160px;
+  height: 45px;
+  margin-bottom: 1rem;
+`;
+
+const PeriodType = styled.select`
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  color: #f0f0f0;
+  font-size: 18px;
+  width: 340px;
+  height: 45px;
+  background-color: #171717;
+  border-radius: 10px;
+  border: #3f4041 solid 1px;
+  transition: box-shadow 0.5s ease-in-out;
+  outline: none;
+  padding: 12px 10px;
+  margin-bottom: .8rem;
+
+  &:hover {
+    box-shadow: 0 0 20px 1px #3f4041;
+  }
+
+  &::placeholder {
+    color: #6e737b;
+  }
+
+  option {
+    padding: 10px;
+    border-radius: 8px;
+  }
 `;
 
 const ModalSubmitInput = styled.input.attrs({ type: "submit" })`
@@ -116,6 +166,7 @@ const ModalCancelInput = styled.input.attrs({ type: "reset" })`
 `;
 
 type InputProps = InputHTMLAttributes<HTMLInputElement>;
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement>;
 
 const Inputs = () => null;
 
@@ -127,8 +178,17 @@ Inputs.Checkbox = ({ ...props }: InputProps) => {
   return <CheckboxInput {...props} />;
 };
 
-Inputs.ModalMD = forwardRef<HTMLInputElement, InputProps>((props, ref) =>
- <ModalMDInput {...props} ref={ref} />);
+Inputs.ModalMD = forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+  <ModalMDInput {...props} ref={ref} />
+));
+
+Inputs.ModalDates = forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+  <ModalDatesInput {...props} ref={ref} />
+));
+
+Inputs.SelectPeriodType = forwardRef<HTMLSelectElement, SelectProps>(
+  (props, ref) => <PeriodType {...props} ref={ref} />
+);
 
 Inputs.ModalSubmit = ({ ...props }: InputProps) => {
   return <ModalSubmitInput {...props} />;
