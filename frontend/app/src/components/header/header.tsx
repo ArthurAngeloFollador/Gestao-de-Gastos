@@ -6,8 +6,6 @@ import { useAuth } from "../../hooks/useAuth";
 import * as S from "./header_Style";
 import Buttons from "../buttons/ButtonStyles";
 
-import { CiBellOn } from "react-icons/ci";
-
 import ProfileDropDownMenu from "../modals/profileDropDownMenu/profileDropDown";
 import NotificationsDropDownMenu from "../modals/notificationsDropDownMenu/notificationsDropDownMenu";
 
@@ -63,7 +61,7 @@ function Header() {
           <S.ProfilePicToBell>
             {/* Notifications menu */}
             <S.BellWrapper>
-              <CiBellOn size={30} color="#f0f0f0" onClick={() => onClickNotification()} />
+              <S.BellIcon size={30} onClick={() => onClickNotification()} />
             </S.BellWrapper>
             <div style={{ position: "relative" }} ref={dropdownRef}>
               <S.ProfilePic>

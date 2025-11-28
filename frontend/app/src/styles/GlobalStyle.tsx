@@ -10,9 +10,9 @@ const GlobalStyle = createGlobalStyle`
         
     }
 
-    :root{
-        background-color: #171717;
-        /* background-color: #101922; */
+    body{
+        background-color: ${({ theme }) => theme.colors.body};
+        color: ${({ theme }) => theme.colors.primaryText};
     }
 `;
 

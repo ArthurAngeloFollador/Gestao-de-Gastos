@@ -41,7 +41,7 @@ const ProfileDropDown = forwardRef<HTMLDivElement, Props>(({ isOpen }, ref) => {
       </S.ProfilePicAndName>
 
       <S.Links>
-        <S.Link>
+        <S.Link onClick={() => navigate("/profile")}>
           <FaRegUser size={iconProps.size} color={iconProps.color} />
           Profile Settings
           <IoIosArrowForward size={iconProps.size} color={iconProps.color} />

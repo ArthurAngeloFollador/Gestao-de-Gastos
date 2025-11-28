@@ -19,6 +19,7 @@ import Budgets from "./pages/budgets/budgets.tsx";
 import Reports from "./pages/reports/Reports.tsx";
 import HelpSuport from "./pages/Help&Suport/helpSuport.tsx";
 import PublicRoute from "./components/PublicRoute.tsx";
+import ProfileSettings from "./pages/profileSettings/profileSettings.tsx";
 
 function AppRouter() {
   return (
@@ -82,6 +83,15 @@ function AppRouter() {
             element={
               <PrivateRoute>
                 <Reports />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfileSettings />
               </PrivateRoute>
             }
           />

@@ -3,7 +3,6 @@ import { type ReactNode, type ButtonHTMLAttributes } from "react";
 
 const BaseButton = styled.button`
   cursor: pointer;
-  color: #f0f0f0;
   font-size: 18px;
   background-color: #3b82f6;
   border-radius: 10px;
@@ -11,6 +10,7 @@ const BaseButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  color: ${({ theme }) => theme.colors.buttonTextColor};
 
   -webkit-user-drag: none;
   user-select: none;
@@ -35,7 +35,6 @@ const LargeNoBgButton = styled(BaseButton)`
   width: 250px;
   height: 55px;
   background-color: #171717;
-  color: #f0f0f0;
   border-radius: 10px;
   border: #3f4041 solid 1px;
 `;
@@ -123,6 +122,27 @@ const SubmitSmallButtonLite = styled(SubmitSmallButton)`
   }
 `;
 
+const SettingsButton = styled(BaseButton)`
+  appearance: none;
+  -webkit-appearance: none;
+   padding: 12px 10px;
+  font-size: 18px;
+  width: 100px;
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.colors.buttonTextColor};
+  `;
+
+  const SaveChanges = styled(BaseButton)`
+  appearance: none;
+  -webkit-appearance: none;
+   padding: 12px 10px;
+  font-size: 18px;
+  width: max-content;
+  margin-bottom: 1rem;
+  align-self: flex-end;
+  color: ${({ theme }) => theme.colors.buttonTextColor};
+  `;
+
 interface ButtonProps {
   children: ReactNode;
 }
@@ -139,6 +159,8 @@ interface ButtonComponent extends React.FC<ButtonProps> {
   SubmitLarge: React.FC<SubButtonProps>;
   SubmitSmall: React.FC<SubButtonProps>;
   SubmitSmallLite: React.FC<SubButtonProps>;
+  Settings: React.FC<SubButtonProps>;
+  SaveChanges: React.FC<SubButtonProps>;
 }
 
 const Buttons: ButtonComponent = ({ children }) => {
@@ -172,4 +194,13 @@ Buttons.SubmitSmall = ({ children, ...rest }) => (
 Buttons.SubmitSmallLite = ({ children, ...rest }) => (
   <SubmitSmallButtonLite {...rest}>{children}</SubmitSmallButtonLite>
 );
+
+Buttons.Settings = ({ children, ...rest }) => (
+  <SettingsButton {...rest}>{children}</SettingsButton>
+);
+
+Buttons.SaveChanges = ({ children, ...rest }) => (
+  <SaveChanges {...rest}>{children}</SaveChanges>
+);
+
 export default Buttons;

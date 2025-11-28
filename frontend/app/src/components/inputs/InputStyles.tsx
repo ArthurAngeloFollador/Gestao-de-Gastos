@@ -138,6 +138,19 @@ const PeriodType = styled.select`
   }
 `;
 
+const SettingsInput = styled(BaseInput)`
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding: 12px 10px;
+  font-size: 18px;
+  width: 340px;
+  height: 45px;
+  margin-bottom: 1rem;
+  background-color: aliceblue;
+  color: #171717;
+`;
+
 const ModalSubmitInput = styled.input.attrs({ type: "submit" })`
   background-color: #3b82f6;
   color: #f0f0f0;
@@ -189,6 +202,10 @@ Inputs.ModalDates = forwardRef<HTMLInputElement, InputProps>((props, ref) => (
 Inputs.SelectPeriodType = forwardRef<HTMLSelectElement, SelectProps>(
   (props, ref) => <PeriodType {...props} ref={ref} />
 );
+
+Inputs.Settings = ({ ...props }: InputProps) => {
+  return <SettingsInput {...props} />;
+};
 
 Inputs.ModalSubmit = ({ ...props }: InputProps) => {
   return <ModalSubmitInput {...props} />;
