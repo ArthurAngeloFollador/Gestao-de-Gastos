@@ -45,6 +45,7 @@ public class TransactionController {
     }
 
     @GetMapping
+//    @JsonView(GenericJsonViews.Public.class)
     public Page<TransactionDTO> getTransactions(@PageableDefault(size = 10) Pageable pageable) {
         return transactionService.findAll(pageable);
     }
