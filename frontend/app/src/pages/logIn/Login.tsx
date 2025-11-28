@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import ArrowBack from "../../components/arrowBack/ArrowBack";
+import toast from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,24 +22,24 @@ function Login() {
     passwordHash: "",
   });
 
-  const [errorMessage, setErrorMessage]: [
-    string,
-    (errorMessage: string) => void
-  ] = useState("");
-
   async function onLogInClick() {
     if (!formData.email || !formData.passwordHash) {
-      setErrorMessage("Please fill in all fields");
+      toast.error("Please fill in all fields");
       return;
     }
 
     // Try to login
     try {
+      toast.promise(login(formData.email, formData.passwordHash), {
+        loading: "Logging in...",
+        success: "Logged in successfully!",
+        error: "Error during login",
+      })
       await login(formData.email, formData.passwordHash);
       navigate("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setErrorMessage(error.message || "Error during signup");
+      toast.error(error.message || "Error during signup");
     }
   }
 
@@ -75,8 +76,6 @@ function Login() {
         >
           Forgot your password?
         </a>
-
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
 
         <Buttons.SubmitLarge
           onClick={() => {

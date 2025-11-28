@@ -8,6 +8,8 @@ export const DropDownBase = styled.div`
   flex-direction: column;
   border-radius: 15px;
   padding: 1rem;
+  min-height: 260px;
+  min-width: 266px;
   height: auto;
   width: auto;
   gap: 10px;

@@ -19,7 +19,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  Filler,
+  Filler
 );
 
 const LineGraph = () => {
@@ -27,40 +27,40 @@ const LineGraph = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: false,
-      },
+      legend: { display: false },
+      tooltip: { enabled: true },
     },
     layout: {
-      padding: 0,
+  padding: {
+    top: 20,
+    bottom: 10,
+    left: 0,
+    right: 0,
+  },
+},
+elements: {
+  line: {
+    tension: 0.4,
+  },
+  point: {
+    radius: 0,
+  },
+},
+scales: {
+  y: {
+    beginAtZero: true,
+    grace: '20%',
+    ticks: {
+      color: "#9f9f9f",
     },
-    scales: {
-      x: {
-        display: false,
-        grid: {
-          display: false,
-        },
-      },
-      y: {
-        display: false,
-        grid: {
-          display: false,
-        },
-      },
+  },
+  x: {
+    ticks: {
+      color: "#9f9f9f",
     },
-    elements: {
-      line: {
-        borderWidth: 2,
-      },
-      point: {
-        radius: 0,
-        hitRadius: 0,
-        hoverRadius: 6,
-      },
-    },
+  },
+},
+
   };
 
   const data = {
@@ -84,20 +84,19 @@ const LineGraph = () => {
         data: [10, 20, 30, 40, 10, 10, 80, 20, 40, 33, 37, 9],
         borderColor: "#00bbff",
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        backgroundColor: (context: { chart: any; } ) => {
+        backgroundColor: (context: { chart: any }) => {
+          const bgColor = ["rgba(0, 187, 255, 0.5)", "rgba(0, 187, 255, 0)"];
 
-          const bgColor = [
-            'rgba(0, 187, 255, 0.5)',
-            'rgba(0, 187, 255, 0)',
-          ];
-
-          if(!context.chart.chartArea) {
+          if (!context.chart.chartArea) {
             return null;
           }
 
           console.log(context.chart.chartArea);
-          
-          const {ctx, chartArea: {top, bottom}} = context.chart;
+
+          const {
+            ctx,
+            chartArea: { top, bottom },
+          } = context.chart;
           const gradientBG = ctx.createLinearGradient(0, top, 0, bottom);
 
           bgColor.map((color, index) => {
@@ -108,13 +107,17 @@ const LineGraph = () => {
         },
         borderWidth: 2,
         tension: 0.4,
-        pointRadius: 0,
+        pointRadius: 2.5,
         fill: true,
       },
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <div style={{ width: "100%", height: "100%" }}>
+      <Line options={options} data={data} />
+    </div>
+  );
 };
 
 export default LineGraph;

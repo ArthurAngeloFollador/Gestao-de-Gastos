@@ -1,3 +1,4 @@
+import { CiBellOn } from "react-icons/ci";
 import styled from "styled-components";
 
 export const HeaderStyled = styled.header`
@@ -12,10 +13,14 @@ export const HeaderStyled = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: #171717;
-  color: #f0f0f0;
-  border-bottom: 1px solid black;
-  box-shadow: 0 0 10px #000000;
+  background-color: ${({ theme }) => theme.colors.body};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.boxShadow};
+  box-shadow: 0 0 10px ${({ theme }) => theme.colors.boxShadow};
+`;
+
+export const BellIcon = styled(CiBellOn)`
+  color: ${({ theme }) => theme.colors.primaryText};
+  cursor: pointer;
 `;
 
 export const Logo = styled.div`

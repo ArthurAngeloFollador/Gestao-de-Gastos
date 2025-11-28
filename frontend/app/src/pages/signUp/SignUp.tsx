@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import Buttons from "../../components/buttons/ButtonStyles";
 import { useAuth } from "../../hooks/useAuth.ts";
 
+import toast from 'react-hot-toast';
+
 import {
   InputContainer,
   SignUpSubText,
@@ -29,11 +31,6 @@ function SignUp() {
     (confirmPassword: string) => void
   ] = useState("");
 
-  const [errorMessage, setErrorMessage]: [
-    string,
-    (errorMessage: string) => void
-  ] = useState("");
-
   const onSignUpClick = async () => {
     if (
       !formData.name ||
@@ -41,22 +38,26 @@ function SignUp() {
       !formData.passwordHash ||
       !confirmPassword
     ) {
-      setErrorMessage("Please fill in all fields");
+      toast.error("Please fill in all fields");
       return;
     }
 
     if (confirmPassword !== formData.passwordHash) {
-      setErrorMessage("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
     // Try to signup
     try {
-      await signup(formData.name, formData.email, formData.passwordHash);
+      toast.promise(signup(formData.name, formData.email, formData.passwordHash), {
+        loading: "Signing up...",
+        success: "Signed up successfully!",
+        error: "Error during signup",
+      })
       navigate("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setErrorMessage(error.message || "Error during signup");
+      toast.error(error.message || "Error during signup");
     }
   };
 
@@ -101,7 +102,6 @@ function SignUp() {
             setConfirmPassword(e.target.value);
           }}
         />
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
         <Buttons.SubmitLarge
           onClick={() => {
             onSignUpClick();

@@ -39,11 +39,13 @@ interface AuthState {
   ) => Promise<void>;
 
   createBudget: (
-    name: string,
+    budgetName: string,
+    periodType: string,
     startDate: Date,
     endDate: Date,
-    amount: number,
-    userCod: number
+    totalBudget: number,
+    userCod: number,
+    status: string
   ) => Promise<void>;
 }
 
@@ -133,6 +135,7 @@ export const useAuth = create<AuthState>()(
         set({ user });
       },
 
+      // Create an account
       createAccount: async (
         accountName: string,
         bankName: string,
@@ -148,6 +151,7 @@ export const useAuth = create<AuthState>()(
         await api.post("/register/account", payload);
       },
 
+      // Create a transaction
       createTransaction: async (
         name: string,
         amount: number,
@@ -166,23 +170,27 @@ export const useAuth = create<AuthState>()(
         };
         await api.post("/movement/transaction", payload);
       },
-      
+
+      // Create a budget
       createBudget: async (
-        // backend error in budgets
-        name: string,
+        budgetName: string,
+        periodType: string,
         startDate: Date,
         endDate: Date,
-        amount: number,
-        userCod: number
+        totalBudget: number,
+        userCod: number,
+        status: string
       ) => {
         const payload = {
-          name,
+          budgetName,
+          periodType,
           startDate,
           endDate,
-          amount,
+          totalBudget,
           userCod,
+          status
         };
-        await api.post("/cadastros/orcamento", payload);
+        await api.post("/register/budgets", payload);
       },
     }),
     {
