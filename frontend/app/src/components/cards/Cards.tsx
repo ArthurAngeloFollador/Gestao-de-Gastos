@@ -21,11 +21,12 @@ const BaseCard = styled.div`
   }
 `;
 
-// TODO: add media queries
-// Graphics Cards
 const DashboardSmallCard = styled(BaseCard)`
   width: 500px;
-  height: 275px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   & .income {
     color: #00bb00;
@@ -333,7 +334,9 @@ const InputOptions = styled.select`
 
 // Graph for small Cards
 const CardGraph = styled.div`
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
 `;
 
 // Conpound Component

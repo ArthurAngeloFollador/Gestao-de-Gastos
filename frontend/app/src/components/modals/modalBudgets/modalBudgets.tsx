@@ -5,6 +5,7 @@ import Modal from "../modalStyles";
 import Input from "../../inputs/InputStyles";
 import { useAuth } from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useMoneyMask } from "../../../hooks/useMoneyMask";
 
 interface Props {
   isOpen: boolean;
@@ -16,6 +17,10 @@ const ModalBudgets = forwardRef<HTMLDivElement, Props>(
     useOutsideClick(ref as React.RefObject<HTMLDivElement>, onClose);
 
     const { createBudget } = useAuth();
+
+    const money = useMoneyMask("$0.00");
+
+
 
     //handle form values
     const budgetNameRef = React.useRef<HTMLInputElement>(null);
@@ -33,7 +38,7 @@ const ModalBudgets = forwardRef<HTMLDivElement, Props>(
         !periodTypeRef.current?.value ||
         !startDateRef.current?.value ||
         !endDateRef.current?.value ||
-        !totalBudgetRef.current?.value
+        money.getRawValue() === 0.00
       ) {
         return toast.error("Please fill in all fields");
       }
@@ -44,12 +49,14 @@ const ModalBudgets = forwardRef<HTMLDivElement, Props>(
           periodTypeRef.current?.value || "",
           new Date(startDateRef.current?.value || ""), //convert string to Date
           new Date(endDateRef.current?.value || ""),
-          Number(totalBudgetRef.current?.value || 0), //convert string to number
-          19
+          money.getRawValue(), //convert string to number
+          19,
+          "ACTIVE"
         );
         onClose();
-        console.log(startDateRef.current?.value);
+        toast.success("Budget created successfully");
       } catch (error) {
+        toast.error("Error creating budget");
         console.log(error);
       }
     };
@@ -72,9 +79,9 @@ const ModalBudgets = forwardRef<HTMLDivElement, Props>(
 
                 <Modal.InputTitle>Amount</Modal.InputTitle>
                 <Input.ModalMD
-                  type="number"
-                  // inputMode="numeric"
-                  // pattern="[0-9]"
+                  value={money.value}
+                  onChange={money.onChange}
+                  type="text"
                   placeholder="e.g., 1000.00"
                   ref={totalBudgetRef}
                 />
@@ -90,21 +97,17 @@ const ModalBudgets = forwardRef<HTMLDivElement, Props>(
                   <option value="BIMONTHLY">Bimonthly</option>
                   <option value="QUARTERLY">uarterly</option>
                   <option value="YEARLY">Monthly</option>
-                  </Input.SelectPeriodType>
+                </Input.SelectPeriodType>
 
                 {/* Dates inputs */}
                 <Modal.DatesInputContainer>
                   <div>
                     <Modal.InputTitle>Initial Date</Modal.InputTitle>
-                    <Input.ModalDates
-                      ref={startDateRef}
-                    />
+                    <Input.ModalDates ref={startDateRef} />
                   </div>
                   <div>
                     <Modal.InputTitle>End Date</Modal.InputTitle>
-                    <Input.ModalDates
-                      ref={endDateRef}
-                    />
+                    <Input.ModalDates ref={endDateRef} />
                   </div>
                 </Modal.DatesInputContainer>
 

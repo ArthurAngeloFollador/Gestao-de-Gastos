@@ -44,7 +44,8 @@ interface AuthState {
     startDate: Date,
     endDate: Date,
     totalBudget: number,
-    userCod: number
+    userCod: number,
+    status: string
   ) => Promise<void>;
 }
 
@@ -177,7 +178,8 @@ export const useAuth = create<AuthState>()(
         startDate: Date,
         endDate: Date,
         totalBudget: number,
-        userCod: number
+        userCod: number,
+        status: string
       ) => {
         const payload = {
           budgetName,
@@ -186,8 +188,9 @@ export const useAuth = create<AuthState>()(
           endDate,
           totalBudget,
           userCod,
+          status
         };
-        await api.post("/cadastros/orcamento", payload);
+        await api.post("/register/budgets", payload);
       },
     }),
     {
